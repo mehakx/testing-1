@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Grid Collage — Page 2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="page page-flow">
+  <header class="header" role="banner">
+    <h1 class="site-title">Hypermedia Collage</h1>
+    <nav class="nav" aria-label="Primary">
+      <a href="index.html">Page 1</a>
+      <a aria-current="page" href="flow.html">Page 2</a>
+      <a href="explore.html">Page 3</a>
+    </nav>
+  </header>
+
+  <main class="grid guides" role="main" aria-describedby="desc">
+    <section id="desc" class="block t2">
+      <h2>Page 2 — Break / Overlap / Perspective</h2>
+      <p>We bend the grid using <code>perspective()</code>, <code>rotateX()</code>, and
+        translations. Overlaps evoke paper layers, but remain responsive.</p>
+    </section>
+
+    <!-- 10+ images -->
+    <figure class="figure x overlap tilt-forward">
+      <img src="assets/collage-01.jpg" alt="Layered flyers with red 'SLAP' headline" />
+      <figcaption>Headline as anchor.</figcaption>
+    </figure>
+
+    <figure class="figure y overlap slide-right">
+      <img src="assets/collage-02.jpg" alt="Blue 'FIORE' type on torn paper" />
+      <figcaption>Type as texture.</figcaption>
+    </figure>
+
+    <figure class="figure z tilt-back">
+      <img src="assets/collage-03.jpg" alt="Vintage camera illustration" />
+      <figcaption>Objects as witnesses.</figcaption>
+    </figure>
+
+    <figure class="figure">
+      <img src="assets/bridge.jpg" alt="Concrete rail by water, cyan sky" />
+      <figcaption>Escape route.</figcaption>
+    </figure>
+
+    <figure class="figure">
+      <img src="assets/train-02.jpg" alt="Train window with silhouette" />
+      <figcaption>Moving frame.</figcaption>
+    </figure>
+
+    <figure class="figure">
+      <img src="assets/tape.png" alt="Masking tape strip" />
+      <figcaption>Hold this here.</figcaption>
+    </figure>
+
+    <figure class="figure">
+      <img src="assets/sticker-green.png" alt="Green label with rounded corners" />
+      <figcaption>Green note.</figcaption>
+    </figure>
+
+    <figure class="figure">
+      <img src="assets/texture-fiber.jpg" alt="Fiber paper texture close up" />
+      <figcaption>Fiber noise.</figcaption>
+    </figure>
+
+    <figure class="figure">
+      <img src="assets/handdrawn.png" alt="Hand-drawn doodle circle" />
+      <figcaption>Human line.</figcaption>
+    </figure>
+
+    <!-- holo hair returns in new scale/pose -->
+    <div class="figure overlap">
+      <div
+        class="holo tilt-forward"
+        style="--mask: url('assets/hair.png'); width:100%; aspect-ratio: 5/3;"
+        role="img"
+        aria-label="Holographic hair motif bending across the layout"
+      ></div>
+      <figcaption>Iridescent thread.</figcaption>
+    </div>
+
+    <!-- text blocks to hit 3+ -->
+    <article class="block t1">
+      <h3>Order vs. Chaos</h3>
+      <p>Breaking alignment changes tone—feels louder, closer, more alive.</p>
+    </article>
+    <article class="block t3">
+      <h3>Scale</h3>
+      <p>Make one thing huge so others feel like whispers. The story tilts.</p>
+    </article>
+  </main>
+
+  <footer class="page" role="contentinfo">
+    <p>
+      Jump to <a href="explore.html">Page 3 — Explore/Hyperlinks</a> or
+      <a href="index.html">back to Page 1</a>.
+    </p>
+  </footer>
+</body>
+</html>
