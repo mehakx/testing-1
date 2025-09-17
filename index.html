@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Grid Perspective Experiment</title>
+  <style>
+    body {
+      background: #ddd;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 200px);
+      grid-template-rows: repeat(3, 200px);
+      gap: 20px;
+      perspective: 1000px; /* depth for 3D */
+    }
+
+    .item {
+      background: #fff;
+      border: 2px solid #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      font-family: sans-serif;
+      transform-style: preserve-3d;
+      transition: transform 0.6s ease;
+    }
+
+    /* Example transforms for different objects */
+    .item1 {
+      transform: perspective(6cm) rotateX(45deg) translateX(50px);
+    }
+    .item2 {
+      transform: perspective(6cm) rotateX(-45deg) translateX(-50px);
+    }
+    .item3 {
+      transform: perspective(6cm) rotateY(30deg) translateY(30px);
+    }
+    .item4 {
+      transform: perspective(6cm) rotateZ(15deg) scale(1.2);
+    }
+  </style>
+</head>
+<body>
+  <div class="grid">
+    <div class="item item1">Photo</div>
+    <div class="item item2">Train</div>
+    <div class="item item3">McD</div>
+    <div class="item item4">XOXO</div>
+    <div class="item">Fiore</div>
+    <div class="item">Slap</div>
+    <div class="item">Girl</div>
+    <div class="item">Explore</div>
+  </div>
+</body>
+</html>
