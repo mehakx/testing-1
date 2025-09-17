@@ -3,109 +3,179 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Grid Collage — Page 1</title>
+  <title>Fragments of Fame — Single Page</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap"
-    rel="stylesheet"
-  />
-  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --bg:#0e0e10;--ink:#f5f6f7;--muted:#b9bcc4;--edge:#2c2c30;
+      --gap:14px;--depth:6cm;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:"Inter",ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.45}
+    a{color:#86f0ff;text-decoration:none} a:hover,a:focus{text-decoration:underline}
+
+    header{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;
+      padding:18px clamp(16px,4vw,40px);border-bottom:1px solid var(--edge)}
+    .title{margin:0;font-weight:800;font-size:clamp(22px,4vw,36px);letter-spacing:.02em}
+
+    main{padding: clamp(16px,4vw,40px)}
+    /* GRID STAGE */
+    .grid{
+      display:grid;gap:var(--gap);
+      grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: 120px;
+      background:
+        repeating-linear-gradient(#242428 0 1px, transparent 1px 120px),
+        repeating-linear-gradient(90deg,#242428 0 1px, transparent 1px 120px),
+        repeating-linear-gradient(#1a1a1f 0 1px, transparent 1px 40px),
+        repeating-linear-gradient(90deg,#1a1a1f 0 1px, transparent 1px 40px);
+      background-blend-mode:lighten;
+      border:1px solid var(--edge);
+    }
+
+    .block{background:#15151a;border:2px solid var(--edge);padding: clamp(12px,2vw,18px)}
+    .figure{background:#121216;border:2px solid var(--edge);padding:6px;display:grid;gap:6px;align-content:start}
+    .figure img,.figure video{width:100%;height:auto;display:block}
+    .figure figcaption{font-size:12px;color:var(--muted)}
+
+    /* 3D helpers */
+    .tilt-fwd{transform: perspective(var(--depth)) rotateX(35deg)}
+    .tilt-back{transform: perspective(var(--depth)) rotateX(-35deg)}
+    .tilt-card{transform: perspective(var(--depth)) rotateX(-25deg) rotateZ(3deg)}
+    .slide-right{transform: perspective(var(--depth)) rotateX(-35deg) translateX(40px)}
+
+    /* Holographic mask utility */
+    .holo{
+      position:relative;
+      -webkit-mask: var(--mask) center/contain no-repeat;
+              mask: var(--mask) center/contain no-repeat;
+      background: conic-gradient(from 0deg at 50% 50%,
+        #ff00ff,#00e5ff,#fff35a,#ff7ad9,#7bffb6,#ff00ff);
+      animation: swirl 16s linear infinite;
+      filter: drop-shadow(0 10px 20px rgba(0,0,0,.35));
+    }
+    .holo::after{
+      content:"";position:absolute;inset:0;
+      background:
+        radial-gradient(120% 80% at 10% 20%, rgba(255,255,255,.35), transparent 60%),
+        radial-gradient(120% 80% at 80% 70%, rgba(255,255,255,.25), transparent 60%),
+        repeating-conic-gradient(from 0deg, rgba(255,255,255,.08) 0 6deg, transparent 6deg 12deg);
+      mix-blend-mode:screen
+    }
+    @keyframes swirl{to{transform:rotate(360deg)}}
+
+    /* layout map */
+    .hero{grid-column:1 / -1}
+    .a{grid-column:1 / span 4; grid-row: span 3}
+    .b{grid-column:5 / span 4; grid-row: span 4}
+    .c{grid-column:9 / span 4; grid-row: span 3}
+    .d{grid-column:1 / span 3; grid-row: span 2}
+    .e{grid-column:4 / span 2; grid-row: span 2}
+    .f{grid-column:6 / span 3; grid-row: span 2}
+    .g{grid-column:9 / span 4; grid-row: span 2}
+    .h{grid-column:1 / span 5; grid-row: span 2}
+    .i{grid-column:6 / span 3; grid-row: span 2}
+    .j{grid-column:9 / span 4; grid-row: span 2}
+    .k{grid-column:3 / span 3; grid-row: span 2}
+
+    /* responsive */
+    @media (max-width: 900px){
+      .grid{grid-template-columns: repeat(6, 1fr); grid-auto-rows: 100px}
+    }
+  </style>
 </head>
-<body class="page page-home">
-  <header class="header" role="banner">
-    <h1 class="site-title">Hypermedia Collage</h1>
-    <nav class="nav" aria-label="Primary">
-      <a aria-current="page" href="index.html">Page 1</a>
-      <a href="flow.html">Page 2</a>
-      <a href="explore.html">Page 3</a>
-    </nav>
+<body>
+  <header>
+    <h1 class="title">Fragments of Fame</h1>
+    <small>single-page collage • grid + perspective + hyperlinks</small>
   </header>
 
-  <main class="grid guides" role="main">
-    <section class="hero block" aria-labelledby="intro-h">
-      <h2 id="intro-h">Page 1 — Order / Grid as Stage</h2>
-      <p>
-        A strict grid turns collage into a “stage.” Elements align, scale, and tilt
-        with intent. Hover and tab through images to reveal captions. Links and
-        embedded media hint at hypertext roots.
-      </p>
-      <p>
-        Theme: <strong>City signals → inner signals</strong> — trains, notes,
-        stickers, and a holographic “hair” motif that flows across pages.
-      </p>
+  <main>
+    <section class="grid" role="region" aria-label="Collage grid">
+      <section class="block hero" aria-labelledby="def">
+        <h2 id="def">fame /feɪm/</h2>
+        <p><strong>Definition:</strong> the state of being known or talked about by many people, especially on account of notable achievements.</p>
+        <p>This page treats the grid as a stage: tidy frames, controlled angles. Hover the pieces; follow captions to linked sources.</p>
+      </section>
+
+      <!-- IMAGE/VIDEO ELEMENTS (swap asset paths) -->
+      <figure class="figure a tilt-fwd">
+        <img src="assets/portrait-bw.jpg" alt="Black and white full-body portrait against plain backdrop" />
+        <figcaption>Visible self.</figcaption>
+      </figure>
+
+      <figure class="figure b">
+        <img src="assets/phone-screen-01.png" alt="Compact digital camera screen with a portrait" />
+        <figcaption><a href="https://en.wikipedia.org/wiki/Fame" target="_blank" rel="noopener">Fame (wiki) ↗</a></figcaption>
+      </figure>
+
+      <figure class="figure c slide-right">
+        <img src="assets/phone-screen-02.png" alt="Old Motorola phone with a headshot on the display" />
+        <figcaption><a href="https://www.youtube.com/results?search_query=fame+song" target="_blank" rel="noopener">Soundtrack of fame ↗</a></figcaption>
+      </figure>
+
+      <figure class="figure d">
+        <div class="holo tilt-back"
+             style="--mask:url('assets/hair.png'); width:100%; aspect-ratio:3/4;"
+             role="img"
+             aria-label="Holographic hair silhouette shimmering with iridescent color"></div>
+        <figcaption>Glamour as surface.</figcaption>
+      </figure>
+
+      <figure class="figure e">
+        <img src="assets/polaroid-01.jpg" alt="Polaroid photo with soft flash" />
+        <figcaption>Snapshot proof.</figcaption>
+      </figure>
+
+      <figure class="figure f">
+        <video src="assets/flash-loop.mp4" muted loop autoplay playsinline aria-label="Camera flash loop"></video>
+        <figcaption>Light loop.</figcaption>
+      </figure>
+
+      <figure class="figure g">
+        <img src="assets/press-badge.png" alt="Press badge laminate" />
+        <figcaption><a href="https://www.theguardian.com/media" target="_blank" rel="noopener">Press & attention ↗</a></figcaption>
+      </figure>
+
+      <figure class="figure h">
+        <img src="assets/grain.jpg" alt="Film grain texture" />
+        <figcaption>Noise of attention.</figcaption>
+      </figure>
+
+      <figure class="figure i">
+        <img src="assets/quote-tile.png" alt="Quote tile: 'known by many, seen by few'" />
+        <figcaption><a href="https://www.are.na/" target="_blank" rel="noopener">Are.na moodboard ↗</a></figcaption>
+      </figure>
+
+      <figure class="figure j">
+        <img src="assets/sticker-xoxo.png" alt="Sticker that says XOXO" />
+        <figcaption>Fan affection.</figcaption>
+      </figure>
+
+      <!-- TEXT BLOCKS -->
+      <article class="block k" aria-labelledby="t1">
+        <h3 id="t1">Order</h3>
+        <p>Grids promise clarity. Beginnings feel clean. Frames contain the self.</p>
+      </article>
+
+      <article class="block" style="grid-column: 7 / span 3; grid-row: span 2" aria-labelledby="t2">
+        <h3 id="t2">Split</h3>
+        <p>Attention multiplies. The <em>celebrity self</em> drifts from the <em>authentic self</em>.</p>
+      </article>
+
+      <article class="block" style="grid-column: 10 / span 3; grid-row: span 2" aria-labelledby="t3">
+        <h3 id="t3">Links make it alive</h3>
+        <p>Paper can’t click. On screens, every fragment can jump elsewhere—articles, songs, maps.</p>
+      </article>
     </section>
 
-    <!-- 10+ figures -->
-    <figure class="figure a tilt-forward">
-      <img src="assets/train-01.jpg" alt="Late afternoon train reflecting gold light" />
-      <figcaption>Rush hour mirror.</figcaption>
-    </figure>
-
-    <figure class="figure b">
-      <img src="assets/polaroid-01.jpg" alt="Self-portrait with compact camera in mirror" />
-      <figcaption>Self as lens.</figcaption>
-    </figure>
-
-    <figure class="figure c slide-right">
-      <img src="assets/bridge.jpg" alt="Blue canal with concrete rail" />
-      <figcaption>Edges and guardrails.</figcaption>
-    </figure>
-
-    <!-- holographic hair masked div (your PNG) -->
-    <div class="figure d">
-      <div
-        class="holo tilt-back"
-        style="--mask: url('assets/hair.png'); width:100%; aspect-ratio: 3/4;"
-        role="img"
-        aria-label="Holographic hair shape shimmering with iridescent color"
-      ></div>
-      <figcaption>Signal flow (holographic).</figcaption>
-    </div>
-
-    <figure class="figure e">
-      <img src="assets/sticker-xoxo.png" alt="XOXO sticker" />
-      <figcaption>Notes to self.</figcaption>
-    </figure>
-
-    <figure class="figure f">
-      <video src="assets/loop.mp4" muted loop autoplay playsinline aria-label="Glitch loop of city lights"></video>
-      <figcaption>Glitch loop.</figcaption>
-    </figure>
-
-    <figure class="figure g">
-      <img src="assets/receipt.jpg" alt="Crumpled receipt with scribbles" />
-      <figcaption>Receipts as memory.</figcaption>
-    </figure>
-
-    <figure class="figure h">
-      <img src="assets/mcd.png" alt="Fast food cup and fries sketch" />
-      <figcaption>Comfort signal.</figcaption>
-    </figure>
-
-    <figure class="figure i">
-      <img src="assets/postage.png" alt="Blue postage stamp with circular marks" />
-      <figcaption>Stamped time.</figcaption>
-    </figure>
-
-    <figure class="figure j">
-      <img src="assets/texture-paper.jpg" alt="Brown torn paper texture" />
-      <figcaption>Torn edges.</figcaption>
-    </figure>
-
-    <!-- text blocks (3+) -->
-    <article class="block k" aria-labelledby="blk1">
-      <h3 id="blk1">Why grid?</h3>
-      <p>Structure lets contrast pop. When everything snaps to a system, the smallest
-        misalignment becomes meaning.</p>
-    </article>
+    <footer style="margin-top:24px;color:#9aa0a6">
+      <p>Credits: replace placeholders with your media. Type: Inter (Google Fonts). Any found/AI assets should be linked in captions.</p>
+    </footer>
   </main>
-
-  <footer class="page" role="contentinfo">
-    <p>
-      Continue to <a href="flow.html">Page 2 — Break the Grid</a>
-    </p>
-  </footer>
 </body>
 </html>
+
 
