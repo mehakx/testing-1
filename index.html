@@ -1,62 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Grid Perspective Experiment</title>
-  <style>
-    body {
-      background: #ddd;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
+<meta charset="UTF-8" />
+<title>Grid + Perspective Stage</title>
+<style>
+  :root{
+    /* quick knobs */
+    --cell: 90px;           /* grid cell size */
+    --gap: 12px;            /* gutter */
+    --depth: 6cm;           /* perspective depth */
+  }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(4, 200px);
-      grid-template-rows: repeat(3, 200px);
-      gap: 20px;
-      perspective: 1000px; /* depth for 3D */
-    }
+  body{
+    margin:0;
+    min-height:100dvh;
+    display:grid;
+    place-items:center;
+    background:#e9e9e9;
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  }
 
-    .item {
-      background: #fff;
-      border: 2px solid #333;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-weight: bold;
-      font-family: sans-serif;
-      transform-style: preserve-3d;
-      transition: transform 0.6s ease;
-    }
+  /* === STAGE: grid as a visible “floor” === */
+  .stage{
+    position:relative;
+    width: calc(var(--cell) * 12 + var(--gap) * 11);
+    height: calc(var(--cell) * 8 + var(--gap) * 7);
+    display:grid;
+    grid-template-columns: repeat(12, var(--cell));
+    grid-auto-rows: var(--cell);
+    gap: var(--gap);
+    perspective: 1000px;              /* camera depth for children */
+    background:
+      /* big squares */
+      repeating-linear-gradient(#cfcfcf 0 1px, transparent 1px var(--cell)),
+      repeating-linear-gradient(90deg, #cfcfcf 0 1px, transparent 1px var(--cell)),
+      /* mini helper guides */
+      repeating-linear-gradient(#dcdcdc 0 1px, transparent 1px calc(var(--cell)/3)),
+      repeating-linear-gradient(90deg, #dcdcdc 0 1px, transparent 1px calc(var(--cell)/3));
+    background-blend-mode: multiply;
+    background-color:#fff;
+    box-shadow: 0 20px 60px rgba(0,0,0,.15);
+    overflow: hidden;
+  }
 
-    /* Example transforms for different objects */
-    .item1 {
-      transform: perspective(6cm) rotateX(45deg) translateX(50px);
-    }
-    .item2 {
-      transform: perspective(6cm) rotateX(-45deg) translateX(-50px);
-    }
-    .item3 {
-      transform: perspective(6cm) rotateY(30deg) translateY(30px);
-    }
-    .item4 {
-      transform: perspective(6cm) rotateZ(15deg) scale(1.2);
-    }
-  </style>
+  /* every object sits on the grid */
+  .obj{
+    transform-style: preserve-3d;
+    display:grid;
+    place-items:center;
+  }
+
+  /* === HAIR OBJECT === */
+  .hair{
+    grid-area: 2 / 4 / span 5 / span 4; /* row-start / col-start / row-span / col-span */
+    transform:
+      perspective(var(--depth))
+      rotateX(-45deg)         /* tilt “towards camera” */
+      translateX(20px);       /* nudge inside its cell area */
+    pointer-events:none;
+  }
+  .hair img{
+    width:100%;
+    height:100%;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,.25));
+    mix-blend-mode: screen;   /* optional: nice glow on light bg */
+  }
+
+  /* example of other collage bits you can add */
+  .tag{
+    grid-area: 6 / 2 / span 2 / span 3;
+    background:#111; color:#fff; font-weight:800; font-size:42px;
+    letter-spacing:.08em; display:flex; align-items:center; justify-content:center;
+    transform: perspective(var(--depth)) rotateX(35deg) rotateZ(-6deg);
+  }
+  .photo{
+    grid-area: 3 / 8 / span 3 / span 4;
+    background:#fff; border:3px solid #222;
+    transform: perspective(var(--depth)) rotateX(35deg) rotateZ(7deg) translateX(-10px);
+  }
+</style>
 </head>
 <body>
-  <div class="grid">
-    <div class="item item1">Photo</div>
-    <div class="item item2">Train</div>
-    <div class="item item3">McD</div>
-    <div class="item item4">XOXO</div>
-    <div class="item">Fiore</div>
-    <div class="item">Slap</div>
-    <div class="item">Girl</div>
-    <div class="item">Explore</div>
-  </div>
+  <main class="stage">
+    <!-- HAIR dropped on the grid -->
+    <div class="obj hair">
+      <img src="hair.png" alt="psychedelic hair" />
+      <!-- If you’re using the uploaded file, name it the same or adjust the path -->
+    </div>
+
+    <!-- Example extra objects to show how you’ll place others -->
+    <div class="obj tag">XOXO</div>
+    <div class="obj photo"></div>
+  </main>
 </body>
 </html>
+
