@@ -1,0 +1,615 @@
+/* VOGUE DECONSTRUCTED COLLAGE - PAGE 2 */
+
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: #0a0a0a;
+    overflow: hidden;
+    height: 100vh;
+    cursor: crosshair;
+}
+
+/* Main container */
+.deconstructed-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(255, 0, 100, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(0, 255, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(255, 255, 0, 0.1) 0%, transparent 50%),
+        linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 30%, #1a1a1a 70%, #0d0d0d 100%);
+    overflow: hidden;
+}
+
+/* Texture layers for depth */
+.texture-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.layer-1 {
+    background: 
+        repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 2px,
+            rgba(255, 255, 255, 0.01) 2px,
+            rgba(255, 255, 255, 0.01) 4px
+        );
+    animation: texture-shift 8s infinite;
+}
+
+.layer-2 {
+    background: 
+        repeating-linear-gradient(
+            -45deg,
+            transparent,
+            transparent 3px,
+            rgba(0, 0, 0, 0.02) 3px,
+            rgba(0, 0, 0, 0.02) 6px
+        );
+    animation: texture-shift 12s infinite reverse;
+}
+
+.layer-3 {
+    background: 
+        repeating-radial-gradient(
+            circle at 50% 50%,
+            transparent,
+            transparent 10px,
+            rgba(255, 0, 128, 0.005) 10px,
+            rgba(255, 0, 128, 0.005) 20px
+        );
+    animation: texture-pulse 6s infinite;
+}
+
+/* Static collage grid */
+.static-collage-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+}
+
+/* Typography elements */
+.typo-element {
+    position: absolute;
+    z-index: 15;
+}
+
+/* Main VOGUE letters */
+.typo-main {
+    top: 3%;
+    left: 3%;
+    font-family: 'Anton', sans-serif;
+    font-size: 7rem;
+    font-weight: 400;
+    z-index: 25;
+}
+
+.letter {
+    display: inline-block;
+    color: #ffffff;
+    text-shadow: 
+        4px 0 #ff0000,
+        -4px 0 #00ffff,
+        0 4px #ffff00,
+        2px 2px 8px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    animation: letter-float 4s ease-in-out infinite;
+    margin-right: 0.1em;
+    letter-spacing: 0.05em;
+}
+
+.letter:hover {
+    transform: scale(1.2) rotate(15deg);
+    color: #ff0080;
+    animation: letter-glitch 0.3s infinite;
+}
+
+.l1 { animation-delay: 0s; }
+.l2 { animation-delay: 0.2s; }
+.l3 { animation-delay: 0.4s; }
+.l4 { animation-delay: 0.6s; }
+.l5 { animation-delay: 0.8s; }
+
+/* FASHION typography */
+.typo-fashion {
+    top: 20%;
+    right: 5%;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 4rem;
+    transform: rotate(-8deg);
+    z-index: 20;
+}
+
+.word-fragment {
+    display: block;
+    color: rgba(255, 255, 255, 0.8);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.word-fragment:hover {
+    color: #00ffff;
+    transform: translateX(15px);
+    animation: text-glitch 0.2s infinite;
+}
+
+.wf1 { margin-bottom: -8px; }
+.wf2 { margin-left: 30px; }
+
+/* CULTURE typography */
+.typo-culture {
+    bottom: 12%;
+    left: 8%;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 3rem;
+    transform: rotate(4deg);
+    z-index: 20;
+}
+
+.stacked-text {
+    display: flex;
+    flex-direction: column;
+    gap: -3px;
+}
+
+.stack-line {
+    color: rgba(255, 255, 255, 0.6);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    transform-origin: left center;
+}
+
+.stack-line:hover {
+    color: #ffff00;
+    transform: scaleX(1.3);
+    animation: text-glitch 0.2s infinite;
+}
+
+/* Magazine covers - Static positioned */
+.magazine-cover {
+    position: absolute;
+    width: 200px;
+    height: 260px;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    clip-path: polygon(0 0, 90% 0, 100% 90%, 10% 100%);
+}
+
+.magazine-cover:hover {
+    border-color: rgba(255, 0, 128, 0.8);
+    box-shadow: 0 0 25px rgba(255, 0, 128, 0.4);
+    z-index: 50;
+    transform: scale(1.05);
+}
+
+.magazine-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: contrast(1.2) saturate(0.8) brightness(0.7);
+    transition: all 0.3s ease;
+}
+
+.magazine-cover:hover img {
+    filter: contrast(1.8) saturate(1.5) brightness(1.1) hue-rotate(15deg);
+    animation: image-glitch 0.2s infinite;
+}
+
+/* Static positioning for all 14 covers */
+.cover-1 { top: 15%; left: 20%; transform: rotate(-8deg); }
+.cover-2 { top: 8%; right: 25%; transform: rotate(12deg); }
+.cover-3 { top: 35%; left: 60%; transform: rotate(-5deg); }
+.cover-4 { top: 55%; right: 10%; transform: rotate(18deg); }
+.cover-5 { bottom: 20%; left: 35%; transform: rotate(-12deg); }
+.cover-6 { top: 25%; left: 40%; transform: rotate(8deg); }
+.cover-7 { bottom: 10%; right: 35%; transform: rotate(-15deg); }
+.cover-8 { top: 45%; left: 8%; transform: rotate(10deg); }
+.cover-9 { bottom: 35%; left: 65%; transform: rotate(-6deg); }
+.cover-10 { top: 65%; right: 45%; transform: rotate(14deg); }
+.cover-11 { top: 12%; left: 45%; transform: rotate(-10deg); }
+.cover-12 { bottom: 45%; right: 20%; transform: rotate(16deg); }
+.cover-13 { top: 75%; left: 15%; transform: rotate(-18deg); }
+.cover-14 { bottom: 5%; left: 50%; transform: rotate(9deg); }
+
+/* Cover overlays */
+.cover-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+    padding: 8px;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.magazine-cover:hover .cover-overlay {
+    opacity: 1;
+}
+
+.overlay-text {
+    font-family: 'JetBrains Mono', monospace;
+    color: #ffffff;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 2px;
+}
+
+.overlay-subtext {
+    font-family: 'JetBrains Mono', monospace;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+}
+
+/* Scattered chaos elements */
+.scattered-chaos {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.chaos-text {
+    position: absolute;
+    font-family: 'Bebas Neue', cursive;
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-size: 1.5rem;
+    font-weight: 400;
+    transform-origin: center;
+    animation: chaos-float 8s ease-in-out infinite;
+    pointer-events: all;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.chaos-text:hover {
+    color: #ff0080;
+    transform: scale(1.2);
+    animation: text-glitch 0.2s infinite;
+}
+
+.glitch-element {
+    position: absolute;
+    font-family: 'JetBrains Mono', monospace;
+    color: #00ff88;
+    font-size: 0.8rem;
+    font-weight: 500;
+    animation: glitch-blink 1.5s infinite;
+    pointer-events: all;
+    cursor: pointer;
+    text-shadow: 0 0 5px rgba(0, 255, 136, 0.3);
+    letter-spacing: 0.1em;
+}
+
+.glitch-element:hover {
+    color: #ff0000;
+    animation: glitch-rapid 0.1s infinite;
+}
+
+/* Chaos positioning - Better balanced around magazine covers */
+.ct1 { top: 6%; left: 78%; animation-delay: 0s; transform: rotate(-12deg); font-size: 1.8rem; }
+.ct2 { top: 22%; left: 15%; animation-delay: 1s; transform: rotate(8deg); font-size: 1.6rem; }
+.ct3 { top: 38%; right: 12%; animation-delay: 2s; transform: rotate(-6deg); font-size: 1.7rem; }
+.ct4 { top: 52%; left: 2%; animation-delay: 3s; transform: rotate(15deg); font-size: 1.5rem; }
+.ct5 { top: 72%; right: 18%; animation-delay: 4s; transform: rotate(-10deg); font-size: 1.9rem; }
+.ct6 { bottom: 28%; left: 82%; animation-delay: 5s; transform: rotate(12deg); font-size: 1.4rem; }
+.ct7 { bottom: 8%; right: 58%; animation-delay: 6s; transform: rotate(-4deg); font-size: 1.6rem; }
+.ct8 { top: 45%; right: 35%; animation-delay: 7s; transform: rotate(7deg); font-size: 1.3rem; }
+.ct9 { bottom: 45%; left: 30%; animation-delay: 8s; transform: rotate(-14deg); font-size: 1.7rem; }
+.ct10 { top: 88%; left: 48%; animation-delay: 9s; transform: rotate(5deg); font-size: 1.5rem; }
+
+/* Glitch positioning - Strategic placement in empty spaces */
+.ge1 { top: 12%; right: 15%; font-size: 0.9rem; }
+.ge2 { top: 65%; left: 85%; font-size: 0.8rem; }
+.ge3 { bottom: 32%; right: 5%; font-size: 0.7rem; }
+.ge4 { top: 42%; left: 22%; font-size: 0.8rem; }
+.ge5 { bottom: 5%; left: 62%; font-size: 0.9rem; }
+
+/* Geometric shapes */
+.geo-shape {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: geo-rotate 10s linear infinite;
+}
+
+.gs1 {
+    width: 80px;
+    height: 80px;
+    top: 18%;
+    right: 48%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 0, 100, 0.1), transparent);
+}
+
+.gs2 {
+    width: 60px;
+    height: 90px;
+    bottom: 28%;
+    left: 28%;
+    transform: rotate(45deg);
+    background: linear-gradient(45deg, rgba(0, 255, 255, 0.1), transparent);
+}
+
+.gs3 {
+    width: 50px;
+    height: 50px;
+    top: 58%;
+    right: 18%;
+    background: rgba(255, 255, 0, 0.1);
+}
+
+.gs4 {
+    width: 120px;
+    height: 2px;
+    top: 78%;
+    left: 18%;
+    background: linear-gradient(90deg, transparent, rgba(255, 0, 128, 0.3), transparent);
+}
+
+.gs5 {
+    width: 2px;
+    height: 150px;
+    top: 8%;
+    left: 68%;
+    background: linear-gradient(0deg, transparent, rgba(0, 255, 255, 0.3), transparent);
+}
+
+/* Distortion effects */
+.distortion-effects {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 20;
+    pointer-events: none;
+}
+
+.static-block {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.1);
+    animation: static-flicker 0.2s infinite;
+}
+
+.sb1 { width: 40px; height: 25px; top: 28%; right: 38%; }
+.sb2 { width: 25px; height: 40px; bottom: 38%; left: 58%; }
+.sb3 { width: 35px; height: 15px; top: 68%; left: 18%; }
+
+/* Corner elements */
+.corner-element {
+    position: fixed;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    z-index: 50;
+}
+
+.top-left { top: 20px; left: 20px; }
+.top-right { top: 20px; right: 20px; }
+.bottom-left { bottom: 20px; left: 20px; }
+.bottom-right { bottom: 20px; right: 20px; }
+
+/* Instructions */
+.instructions {
+    position: fixed;
+    bottom: 50px;
+    left: 50px;
+    z-index: 100;
+}
+
+.instruction {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 5px;
+    animation: instruction-blink 3s infinite;
+}
+
+.instruction:nth-child(2) { animation-delay: 1s; }
+.instruction:nth-child(3) { animation-delay: 2s; }
+
+/* Animations */
+@keyframes texture-shift {
+    0%, 100% { transform: translateX(0) translateY(0); }
+    25% { transform: translateX(8px) translateY(-4px); }
+    50% { transform: translateX(-4px) translateY(8px); }
+    75% { transform: translateX(12px) translateY(4px); }
+}
+
+@keyframes texture-pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 0.8; }
+}
+
+@keyframes letter-float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(3deg); }
+}
+
+@keyframes chaos-float {
+    0%, 100% { 
+        transform: translateY(0px) rotate(var(--rotation, 0deg));
+        opacity: 0.4;
+    }
+    50% { 
+        transform: translateY(-20px) rotate(var(--rotation, 0deg));
+        opacity: 0.7;
+    }
+}
+
+@keyframes glitch-blink {
+    0%, 70% { opacity: 1; }
+    71%, 100% { opacity: 0.3; }
+}
+
+@keyframes letter-glitch {
+    0%, 100% { 
+        text-shadow: 4px 0 #ff0000, -4px 0 #00ffff, 0 4px #ffff00, 2px 2px 8px rgba(0, 0, 0, 0.5);
+        transform: translate(0) scale(1.2) rotate(15deg);
+    }
+    25% { 
+        text-shadow: -4px 0 #ff0000, 4px 0 #00ffff, 0 -4px #ffff00, 2px 2px 8px rgba(0, 0, 0, 0.5);
+        transform: translate(-2px, 2px) scale(1.2) rotate(15deg);
+    }
+    50% { 
+        text-shadow: 4px 0 #ff0000, -4px 0 #00ffff, 0 4px #ffff00, 2px 2px 8px rgba(0, 0, 0, 0.5);
+        transform: translate(2px, -2px) scale(1.2) rotate(15deg);
+    }
+    75% { 
+        text-shadow: -4px 0 #ff0000, 4px 0 #00ffff, 0 -4px #ffff00, 2px 2px 8px rgba(0, 0, 0, 0.5);
+        transform: translate(-2px, -2px) scale(1.2) rotate(15deg);
+    }
+}
+
+@keyframes text-glitch {
+    0%, 100% { 
+        transform: translate(0);
+        filter: hue-rotate(0deg);
+    }
+    25% { 
+        transform: translate(-1px, 1px);
+        filter: hue-rotate(90deg);
+    }
+    50% { 
+        transform: translate(1px, -1px);
+        filter: hue-rotate(180deg);
+    }
+    75% { 
+        transform: translate(-1px, -1px);
+        filter: hue-rotate(270deg);
+    }
+}
+
+@keyframes image-glitch {
+    0%, 100% { 
+        filter: contrast(1.8) saturate(1.5) brightness(1.1) hue-rotate(15deg);
+        transform: translate(0);
+    }
+    20% { 
+        filter: contrast(2) saturate(2) brightness(1.3) hue-rotate(45deg);
+        transform: translate(-1px, 1px);
+    }
+    40% { 
+        filter: contrast(1.5) saturate(1.8) brightness(0.9) hue-rotate(90deg);
+        transform: translate(1px, -1px);
+    }
+    60% { 
+        filter: contrast(2.2) saturate(1.2) brightness(1.2) hue-rotate(180deg);
+        transform: translate(-1px, -1px);
+    }
+    80% { 
+        filter: contrast(1.7) saturate(1.6) brightness(1.1) hue-rotate(270deg);
+        transform: translate(1px, 1px);
+    }
+}
+
+@keyframes glitch-rapid {
+    0%, 100% { 
+        transform: translate(0);
+        color: #ff0000;
+    }
+    25% { 
+        transform: translate(-1px, 1px);
+        color: #00ff00;
+    }
+    50% { 
+        transform: translate(1px, -1px);
+        color: #0000ff;
+    }
+    75% { 
+        transform: translate(-1px, -1px);
+        color: #ffff00;
+    }
+}
+
+@keyframes geo-rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes static-flicker {
+    0%, 100% { opacity: 0.1; }
+    50% { opacity: 0.3; }
+}
+
+@keyframes instruction-blink {
+    0%, 80% { opacity: 0.5; }
+    81%, 100% { opacity: 0.2; }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .typo-main {
+        font-size: 3rem;
+    }
+    
+    .typo-fashion {
+        font-size: 2rem;
+    }
+    
+    .typo-culture {
+        font-size: 1.5rem;
+    }
+    
+    .magazine-cover {
+        width: 150px;
+        height: 195px;
+    }
+    
+    .chaos-text {
+        font-size: 1rem;
+    }
+    
+    .glitch-element {
+        font-size: 0.6rem;
+    }
+    
+    .instructions {
+        bottom: 30px;
+        left: 30px;
+    }
+    
+    .instruction {
+        font-size: 0.6rem;
+    }
+}
