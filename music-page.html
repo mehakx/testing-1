@@ -3,163 +3,516 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sonic Fragments — Music Collage</title>
-    <link rel="stylesheet" href="music-style.css">
+    <title>Sonic Fragments — Interactive Jigsaw</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .puzzle-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Header */
+        .puzzle-header {
+            position: fixed;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            z-index: 1000;
+            color: white;
+        }
+
+        .puzzle-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 3s ease-in-out infinite;
+            margin-bottom: 10px;
+        }
+
+        .puzzle-header p {
+            font-size: 1rem;
+            opacity: 0.8;
+            font-weight: 300;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Navigation */
+        .page-navigation {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-link {
+            color: #f4f4f4;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .nav-link.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        /* Puzzle Pieces */
+        .puzzle-piece {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            cursor: grab;
+            transition: all 0.3s ease;
+            z-index: 1;
+            user-select: none;
+        }
+
+        .puzzle-piece:hover {
+            z-index: 100;
+            transform: scale(1.05);
+            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5));
+        }
+
+        .puzzle-piece.dragging {
+            cursor: grabbing;
+            z-index: 1000;
+            transform: scale(1.1) rotate(5deg);
+            filter: drop-shadow(0 15px 40px rgba(0, 0, 0, 0.7));
+        }
+
+        .puzzle-piece img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        /* Realistic Jigsaw Shapes */
+        .piece-1 {
+            clip-path: polygon(0% 0%, 70% 0%, 85% 15%, 100% 15%, 100% 50%, 85% 50%, 85% 65%, 100% 65%, 100% 100%, 30% 100%, 15% 85%, 0% 85%, 0% 50%, 15% 50%, 15% 35%, 0% 35%);
+        }
+
+        .piece-2 {
+            clip-path: polygon(15% 0%, 100% 0%, 100% 35%, 85% 35%, 85% 50%, 100% 50%, 100% 85%, 85% 85%, 70% 100%, 0% 100%, 0% 65%, 15% 65%, 15% 50%, 0% 50%, 0% 15%, 15% 15%);
+        }
+
+        .piece-3 {
+            clip-path: polygon(0% 15%, 15% 15%, 15% 0%, 85% 0%, 100% 15%, 100% 50%, 85% 50%, 85% 65%, 100% 65%, 100% 100%, 15% 100%, 0% 85%, 0% 50%, 15% 50%, 15% 35%, 0% 35%);
+        }
+
+        .piece-4 {
+            clip-path: polygon(0% 0%, 85% 0%, 100% 15%, 100% 85%, 85% 100%, 15% 100%, 0% 85%, 0% 65%, 15% 65%, 15% 50%, 0% 50%, 0% 35%, 15% 35%, 15% 15%, 0% 15%);
+        }
+
+        .piece-5 {
+            clip-path: polygon(15% 0%, 85% 0%, 85% 15%, 100% 15%, 100% 85%, 85% 85%, 85% 100%, 15% 100%, 15% 85%, 0% 85%, 0% 15%, 15% 15%);
+        }
+
+        .piece-6 {
+            clip-path: polygon(0% 0%, 100% 0%, 100% 15%, 85% 15%, 85% 35%, 100% 35%, 100% 65%, 85% 65%, 85% 85%, 100% 85%, 100% 100%, 0% 100%, 0% 85%, 15% 85%, 15% 65%, 0% 65%, 0% 35%, 15% 35%, 15% 15%, 0% 15%);
+        }
+
+        .piece-7 {
+            clip-path: polygon(0% 15%, 15% 15%, 15% 0%, 100% 0%, 100% 100%, 85% 100%, 85% 85%, 70% 85%, 70% 70%, 85% 70%, 85% 50%, 70% 50%, 70% 35%, 85% 35%, 85% 15%, 70% 15%, 70% 0%, 15% 0%, 15% 15%, 0% 15%);
+        }
+
+        .piece-8 {
+            clip-path: polygon(15% 0%, 85% 0%, 100% 15%, 100% 100%, 0% 100%, 0% 85%, 15% 85%, 15% 65%, 0% 65%, 0% 35%, 15% 35%, 15% 15%, 0% 15%, 0% 0%, 15% 0%);
+        }
+
+        .piece-9 {
+            clip-path: polygon(0% 0%, 85% 0%, 85% 15%, 100% 15%, 100% 85%, 85% 85%, 85% 100%, 15% 100%, 0% 85%, 0% 50%, 15% 50%, 15% 35%, 0% 35%);
+        }
+
+        .piece-10 {
+            clip-path: polygon(15% 0%, 100% 0%, 100% 85%, 85% 85%, 85% 100%, 0% 100%, 0% 15%, 15% 15%, 15% 35%, 30% 35%, 30% 50%, 15% 50%, 15% 65%, 30% 65%, 30% 85%, 15% 85%);
+        }
+
+        .piece-11 {
+            clip-path: polygon(0% 15%, 15% 15%, 15% 0%, 85% 0%, 100% 15%, 100% 100%, 15% 100%, 0% 85%, 0% 65%, 15% 65%, 15% 50%, 0% 50%, 0% 35%, 15% 35%);
+        }
+
+        .piece-12 {
+            clip-path: polygon(15% 0%, 85% 0%, 85% 15%, 100% 15%, 100% 65%, 85% 65%, 85% 85%, 100% 85%, 100% 100%, 15% 100%, 0% 85%, 0% 15%, 15% 15%);
+        }
+
+        .piece-13 {
+            clip-path: polygon(0% 0%, 100% 0%, 100% 85%, 85% 85%, 85% 100%, 15% 100%, 15% 85%, 0% 85%, 0% 65%, 15% 65%, 15% 50%, 0% 50%, 0% 35%, 15% 35%, 15% 15%, 0% 15%);
+        }
+
+        .piece-14 {
+            clip-path: polygon(15% 0%, 100% 0%, 100% 15%, 85% 15%, 85% 35%, 100% 35%, 100% 100%, 0% 100%, 0% 85%, 15% 85%, 15% 65%, 0% 65%, 0% 15%, 15% 15%);
+        }
+
+        .piece-15 {
+            clip-path: polygon(0% 15%, 15% 15%, 15% 0%, 85% 0%, 85% 15%, 100% 15%, 100% 100%, 85% 100%, 85% 85%, 70% 85%, 70% 70%, 85% 70%, 85% 50%, 70% 50%, 70% 35%, 85% 35%, 85% 15%, 70% 15%, 70% 0%, 15% 0%, 15% 15%, 0% 15%);
+        }
+
+        /* Lyric Overlay */
+        .lyric-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+            border-radius: 10px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .puzzle-piece:hover .lyric-overlay {
+            opacity: 1;
+        }
+
+        .lyric-text {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .album-info {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            font-weight: 300;
+        }
+
+        /* Instructions */
+        .instructions {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            text-align: center;
+            z-index: 1000;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .puzzle-piece {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .puzzle-header h1 {
+                font-size: 2rem;
+            }
+            
+            .instructions {
+                bottom: 20px;
+                font-size: 0.8rem;
+                padding: 10px 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="music-container">
+    <div class="puzzle-container">
         <!-- Header -->
-        <header class="music-header">
-            <h1>Sonic Fragments</h1>
-            <p>Hover to reveal the poetry within</p>
+        <header class="puzzle-header">
+            <h1>Sonic Jigsaw</h1>
+            <p>Drag the pieces to create your musical collage</p>
         </header>
 
         <!-- Navigation -->
         <nav class="page-navigation">
             <a href="index.html" class="nav-link">01 // FRAGMENTS</a>
             <a href="page2.html" class="nav-link">02 // VOGUE</a>
-            <a href="music-page.html" class="nav-link active">03 // SONIC</a>
+            <a href="interactive-puzzle.html" class="nav-link active">03 // SONIC</a>
         </nav>
 
-        <!-- Album Grid -->
-        <div class="album-grid">
-            <div class="album-item" data-lyric="Music speaks when words fail">
-                <img src="music-images/Screenshot2025-09-21at2.48.22PM.png" alt="Sweetener Album Cover">
-                <div class="album-overlay">
-                    <div class="lyric-text">Music speaks when words fail</div>
-                    <div class="album-info">Sweetener</div>
-                </div>
-            </div>
-
-            <div class="album-item" data-lyric="Lost in the waves of sound">
-                <img src="music-images/Screenshot2025-09-21at2.48.44PM.png" alt="Wiped Out Album Cover">
-                <div class="album-overlay">
-                    <div class="lyric-text">Lost in the waves of sound</div>
-                    <div class="album-info">Wiped Out!</div>
-                </div>
-            </div>
-
-            <div class="album-item" data-lyric="Dancing through the memories">
-                <img src="music-images/Screenshot2025-09-21at2.49.01PM.png" alt="Havana Single Cover">
-                <div class="album-overlay">
-                    <div class="lyric-text">Dancing through the memories</div>
-                    <div class="album-info">Havana</div>
-                </div>
-            </div>
-
-            <div class="album-item" data-lyric="Poetry in motion, rhythm in soul">
-                <img src="music-images/Screenshot2025-09-21at2.49.14PM.png" alt="DAMN Album Cover">
-                <div class="album-overlay">
-                    <div class="lyric-text">Poetry in motion, rhythm in soul</div>
-                    <div class="album-info">DAMN.</div>
-                </div>
-            </div>
-
-            <div class="album-item" data-lyric="Colors bleeding through the silence">
-                <img src="music-images/Screenshot2025-09-21at2.49.20PM.png" alt="Album Cover">
-                <div class="album-overlay">
-                    <div class="lyric-text">Colors bleeding through the silence</div>
-                    <div class="album-info">Untitled</div>
-                </div>
-            </div>
-
-            <div class="album-item" data-lyric="Following the golden path">
-                <img src="music-images/Screenshot2025-09-21at2.49.28PM.png" alt="Bruno Mars Album">
-                <div class="album-overlay">
-                    <div class="lyric-text">Following the golden path</div>
-                    <div class="album-info">Doo-Wops & Hooligans</div>
-                </div>
-            </div>
-
-            <div class="album-item" data-lyric="Crown heavy with dreams">
-                <img src="music-images/Screenshot2025-09-21at2.49.37PM.png" alt="ANTI Album Cover">
-                <div class="album-overlay">
-                    <div class="lyric-text">Crown heavy with dreams</div>
-                    <div class="album-info">ANTI</div>
-                </div>
-            </div>
-
-            <div class="album-item" data-lyric="Freedom rides on desert winds">
-                <img src="music-images/Screenshot2025-09-21at2.49.44PM.png" alt="Free Spirit Album">
-                <div class="album-overlay">
-                    <div class="lyric-text">Freedom rides on desert winds</div>
-                    <div class="album-info">Free Spirit</div>
-                </div>
-            </div>
-
-            <div class="album-item" data-lyric="Whispers in the emerald light">
-                <img src="music-images/Screenshot2025-09-21at2.51.03PM.png" alt="Positions Album">
-                <div class="album-overlay">
-                    <div class="lyric-text">Whispers in the emerald light</div>
-                    <div class="album-info">Positions</div>
-                </div>
-            </div>
-
-            <div class="album-item" data-lyric="Floating on endless blue">
-                <img src="music-images/Screenshot2025-09-21at2.51.21PM.png" alt="Shawn Mendes Album">
-                <div class="album-overlay">
-                    <div class="lyric-text">Floating on endless blue</div>
-                    <div class="album-info">Shawn Mendes</div>
-                </div>
-            </div>
-
-            <div class="album-item" data-lyric="Silver boots, golden dreams">
-                <img src="music-images/Screenshot2025-09-21at2.51.48PM.png" alt="Album Cover">
-                <div class="album-overlay">
-                    <div class="lyric-text">Silver boots, golden dreams</div>
-                    <div class="album-info">Untitled</div>
-                </div>
-            </div>
-
-            <div class="album-item" data-lyric="Moonwalking through time">
-                <img src="music-images/Screenshot2025-09-21at2.51.59PM.png" alt="Thriller Album">
-                <div class="album-overlay">
-                    <div class="lyric-text">Moonwalking through time</div>
-                    <div class="album-info">Thriller</div>
-                </div>
-            </div>
-
-            <div class="album-item" data-lyric="Truth hidden behind closed eyes">
-                <img src="music-images/Screenshot2025-09-21at2.52.16PM.png" alt="Blonde Album">
-                <div class="album-overlay">
-                    <div class="lyric-text">Truth hidden behind closed eyes</div>
-                    <div class="album-info">Blonde</div>
-                </div>
-            </div>
-
-            <div class="album-item" data-lyric="Reflection of a thousand stories">
-                <img src="music-images/Screenshot2025-09-21at2.48.32PM.png" alt="Album Cover">
-                <div class="album-overlay">
-                    <div class="lyric-text">Reflection of a thousand stories</div>
-                    <div class="album-info">Untitled</div>
-                </div>
-            </div>
-
-            <div class="album-item" data-lyric="Stars burn bright in the darkness">
-                <img src="music-images/Screenshot2025-09-21at2.48.52PM.png" alt="Starboy Album">
-                <div class="album-overlay">
-                    <div class="lyric-text">Stars burn bright in the darkness</div>
-                    <div class="album-info">Starboy</div>
-                </div>
+        <!-- Puzzle Pieces -->
+        <div class="puzzle-piece piece-1" style="top: 100px; left: 100px;" data-lyric="Music speaks when words fail" data-album="Sweetener">
+            <img src="music-images/Screenshot2025-09-21at2.48.22PM.png" alt="Sweetener Album Cover">
+            <div class="lyric-overlay">
+                <div class="lyric-text">Music speaks when words fail</div>
+                <div class="album-info">Sweetener</div>
             </div>
         </div>
 
-        <!-- Footer Info -->
-        <div class="music-footer">
-            <div class="footer-text">
-                <p>Music is the universal language of emotion</p>
-                <p>Each cover tells a story, each hover reveals a soul</p>
+        <div class="puzzle-piece piece-2" style="top: 150px; left: 350px;" data-lyric="Lost in the waves of sound" data-album="Wiped Out!">
+            <img src="music-images/Screenshot2025-09-21at2.48.44PM.png" alt="Wiped Out Album Cover">
+            <div class="lyric-overlay">
+                <div class="lyric-text">Lost in the waves of sound</div>
+                <div class="album-info">Wiped Out!</div>
             </div>
         </div>
 
-        <!-- Corner Elements -->
-        <div class="corner-element top-left">SONIC</div>
-        <div class="corner-element top-right">COLLAGE</div>
-        <div class="corner-element bottom-left">INTERACTIVE</div>
-        <div class="corner-element bottom-right">03/03</div>
+        <div class="puzzle-piece piece-3" style="top: 80px; left: 600px;" data-lyric="Dancing through the memories" data-album="Havana">
+            <img src="music-images/Screenshot2025-09-21at2.49.01PM.png" alt="Havana Single Cover">
+            <div class="lyric-overlay">
+                <div class="lyric-text">Dancing through the memories</div>
+                <div class="album-info">Havana</div>
+            </div>
+        </div>
+
+        <div class="puzzle-piece piece-4" style="top: 200px; left: 850px;" data-lyric="Poetry in motion, rhythm in soul" data-album="DAMN.">
+            <img src="music-images/Screenshot2025-09-21at2.49.14PM.png" alt="DAMN Album Cover">
+            <div class="lyric-overlay">
+                <div class="lyric-text">Poetry in motion, rhythm in soul</div>
+                <div class="album-info">DAMN.</div>
+            </div>
+        </div>
+
+        <div class="puzzle-piece piece-5" style="top: 300px; left: 200px;" data-lyric="Colors bleeding through the silence" data-album="Untitled">
+            <img src="music-images/Screenshot2025-09-21at2.49.20PM.png" alt="Album Cover">
+            <div class="lyric-overlay">
+                <div class="lyric-text">Colors bleeding through the silence</div>
+                <div class="album-info">Untitled</div>
+            </div>
+        </div>
+
+        <div class="puzzle-piece piece-6" style="top: 350px; left: 450px;" data-lyric="Following the golden path" data-album="Doo-Wops & Hooligans">
+            <img src="music-images/Screenshot2025-09-21at2.49.28PM.png" alt="Bruno Mars Album">
+            <div class="lyric-overlay">
+                <div class="lyric-text">Following the golden path</div>
+                <div class="album-info">Doo-Wops & Hooligans</div>
+            </div>
+        </div>
+
+        <div class="puzzle-piece piece-7" style="top: 280px; left: 700px;" data-lyric="Crown heavy with dreams" data-album="ANTI">
+            <img src="music-images/Screenshot2025-09-21at2.49.37PM.png" alt="ANTI Album Cover">
+            <div class="lyric-overlay">
+                <div class="lyric-text">Crown heavy with dreams</div>
+                <div class="album-info">ANTI</div>
+            </div>
+        </div>
+
+        <div class="puzzle-piece piece-8" style="top: 120px; left: 950px;" data-lyric="Freedom rides on desert winds" data-album="Free Spirit">
+            <img src="music-images/Screenshot2025-09-21at2.49.44PM.png" alt="Free Spirit Album">
+            <div class="lyric-overlay">
+                <div class="lyric-text">Freedom rides on desert winds</div>
+                <div class="album-info">Free Spirit</div>
+            </div>
+        </div>
+
+        <div class="puzzle-piece piece-9" style="top: 400px; left: 100px;" data-lyric="Whispers in the emerald light" data-album="Positions">
+            <img src="music-images/Screenshot2025-09-21at2.51.03PM.png" alt="Positions Album">
+            <div class="lyric-overlay">
+                <div class="lyric-text">Whispers in the emerald light</div>
+                <div class="album-info">Positions</div>
+            </div>
+        </div>
+
+        <div class="puzzle-piece piece-10" style="top: 450px; left: 350px;" data-lyric="Floating on endless blue" data-album="Shawn Mendes">
+            <img src="music-images/Screenshot2025-09-21at2.51.21PM.png" alt="Shawn Mendes Album">
+            <div class="lyric-overlay">
+                <div class="lyric-text">Floating on endless blue</div>
+                <div class="album-info">Shawn Mendes</div>
+            </div>
+        </div>
+
+        <div class="puzzle-piece piece-11" style="top: 380px; left: 600px;" data-lyric="Silver boots, golden dreams" data-album="Untitled">
+            <img src="music-images/Screenshot2025-09-21at2.51.48PM.png" alt="Album Cover">
+            <div class="lyric-overlay">
+                <div class="lyric-text">Silver boots, golden dreams</div>
+                <div class="album-info">Untitled</div>
+            </div>
+        </div>
+
+        <div class="puzzle-piece piece-12" style="top: 420px; left: 850px;" data-lyric="Moonwalking through time" data-album="Thriller">
+            <img src="music-images/Screenshot2025-09-21at2.51.59PM.png" alt="Thriller Album">
+            <div class="lyric-overlay">
+                <div class="lyric-text">Moonwalking through time</div>
+                <div class="album-info">Thriller</div>
+            </div>
+        </div>
+
+        <div class="puzzle-piece piece-13" style="top: 500px; left: 200px;" data-lyric="Truth hidden behind closed eyes" data-album="Blonde">
+            <img src="music-images/Screenshot2025-09-21at2.52.16PM.png" alt="Blonde Album">
+            <div class="lyric-overlay">
+                <div class="lyric-text">Truth hidden behind closed eyes</div>
+                <div class="album-info">Blonde</div>
+            </div>
+        </div>
+
+        <div class="puzzle-piece piece-14" style="top: 480px; left: 500px;" data-lyric="Reflection of a thousand stories" data-album="Untitled">
+            <img src="music-images/Screenshot2025-09-21at2.48.32PM.png" alt="Album Cover">
+            <div class="lyric-overlay">
+                <div class="lyric-text">Reflection of a thousand stories</div>
+                <div class="album-info">Untitled</div>
+            </div>
+        </div>
+
+        <div class="puzzle-piece piece-15" style="top: 320px; left: 1000px;" data-lyric="Stars burn bright in the darkness" data-album="Starboy">
+            <img src="music-images/Screenshot2025-09-21at2.48.52PM.png" alt="Starboy Album">
+            <div class="lyric-overlay">
+                <div class="lyric-text">Stars burn bright in the darkness</div>
+                <div class="album-info">Starboy</div>
+            </div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="instructions">
+            🧩 Drag pieces around • Hover for lyrics • Create your own musical story
+        </div>
     </div>
 
-    <script src="music-script.js"></script>
+    <script>
+        // Drag and Drop Functionality
+        let isDragging = false;
+        let currentPiece = null;
+        let offset = { x: 0, y: 0 };
+
+        // Initialize drag functionality for all puzzle pieces
+        document.querySelectorAll('.puzzle-piece').forEach(piece => {
+            piece.addEventListener('mousedown', startDrag);
+            piece.addEventListener('touchstart', startDrag, { passive: false });
+        });
+
+        function startDrag(e) {
+            e.preventDefault();
+            isDragging = true;
+            currentPiece = e.currentTarget;
+            currentPiece.classList.add('dragging');
+
+            const rect = currentPiece.getBoundingClientRect();
+            const clientX = e.clientX || e.touches[0].clientX;
+            const clientY = e.clientY || e.touches[0].clientY;
+
+            offset.x = clientX - rect.left;
+            offset.y = clientY - rect.top;
+
+            // Add global event listeners
+            document.addEventListener('mousemove', drag);
+            document.addEventListener('mouseup', stopDrag);
+            document.addEventListener('touchmove', drag, { passive: false });
+            document.addEventListener('touchend', stopDrag);
+        }
+
+        function drag(e) {
+            if (!isDragging || !currentPiece) return;
+            e.preventDefault();
+
+            const clientX = e.clientX || e.touches[0].clientX;
+            const clientY = e.clientY || e.touches[0].clientY;
+
+            const newX = clientX - offset.x;
+            const newY = clientY - offset.y;
+
+            // Constrain to viewport
+            const maxX = window.innerWidth - currentPiece.offsetWidth;
+            const maxY = window.innerHeight - currentPiece.offsetHeight;
+
+            const constrainedX = Math.max(0, Math.min(newX, maxX));
+            const constrainedY = Math.max(0, Math.min(newY, maxY));
+
+            currentPiece.style.left = constrainedX + 'px';
+            currentPiece.style.top = constrainedY + 'px';
+        }
+
+        function stopDrag() {
+            if (currentPiece) {
+                currentPiece.classList.remove('dragging');
+                currentPiece = null;
+            }
+            isDragging = false;
+
+            // Remove global event listeners
+            document.removeEventListener('mousemove', drag);
+            document.removeEventListener('mouseup', stopDrag);
+            document.removeEventListener('touchmove', drag);
+            document.removeEventListener('touchend', stopDrag);
+        }
+
+        // Prevent default drag behavior on images
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('dragstart', e => e.preventDefault());
+        });
+
+        // Random shuffle function
+        function shufflePieces() {
+            document.querySelectorAll('.puzzle-piece').forEach(piece => {
+                const maxX = window.innerWidth - piece.offsetWidth;
+                const maxY = window.innerHeight - piece.offsetHeight;
+                
+                const randomX = Math.random() * maxX;
+                const randomY = Math.random() * maxY;
+                
+                piece.style.left = randomX + 'px';
+                piece.style.top = randomY + 'px';
+            });
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 's' || e.key === 'S') {
+                shufflePieces();
+            }
+        });
+
+        // Add some random movement on load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.querySelectorAll('.puzzle-piece').forEach((piece, index) => {
+                    setTimeout(() => {
+                        const randomX = Math.random() * (window.innerWidth - 200);
+                        const randomY = Math.random() * (window.innerHeight - 200);
+                        piece.style.transition = 'all 1s ease';
+                        piece.style.left = randomX + 'px';
+                        piece.style.top = randomY + 'px';
+                    }, index * 100);
+                });
+            }, 500);
+        });
+    </script>
 </body>
 </html>
+
