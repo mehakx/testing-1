@@ -149,6 +149,16 @@ a:focus {
   }
 }
 
+.page-navigation {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+}
+
+
 /* ---------- 3D transforms helpers ---------- */
 .tilt-forward {
   transform: perspective(var(--depth)) rotateX(35deg);
