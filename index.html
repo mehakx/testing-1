@@ -82,6 +82,57 @@
     .i { grid-column: 9 / span 2; }
     .j { grid-column: 11 / span 2; }
 
+    /* Navigation Styling */
+    .page-navigation {
+      position: fixed;
+      top: 30px;
+      right: 30px;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      border-radius: 10px;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 1000;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .page-navigation a {
+      color: #f4f4f4;
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .page-navigation a:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateX(5px);
+    }
+
+    .page-navigation a[href="index.html"] {
+      background: linear-gradient(135deg, #ff5f6d, #ffc371);
+      color: white;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .page-navigation {
+        top: 20px;
+        right: 20px;
+        padding: 10px;
+      }
+      .page-navigation a {
+        font-size: 12px;
+        padding: 6px 10px;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -105,12 +156,12 @@
       <div class="block color10 j">escape</div>
     </section>
   </main>
-<nav class="page-navigation">
+
+  <nav class="page-navigation">
     <a href="index.html">01 // FRAGMENTS</a>
     <a href="page2.html">02 // VOGUE</a>
     <a href="music-page.html">03 // SONIC</a>
-</nav>
-
+  </nav>
 
 </body>
 </html>
