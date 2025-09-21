@@ -32,7 +32,7 @@
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(12, 1fr);
+      grid-template-columns: repeat(12, 1fr );
       grid-auto-rows: 120px;
       gap: var(--gap);
       background:
@@ -91,7 +91,7 @@
 
   <main>
     <section class="grid">
-      <div class="block hero">fame /feɪm/ — “to be known, to be seen”</div>
+      <div class="block hero">fame /feɪm/ — "to be known, to be seen"</div>
 
       <div class="block color1 a tilt-fwd">visibility</div>
       <div class="block color2 b tilt-back">pressure</div>
@@ -103,10 +103,12 @@
       <div class="block color8 h">noise</div>
       <div class="block color9 i">desire</div>
       <div class="block color10 j">escape</div>
-
-      <a href="page2.html" style="position: fixed; top: 20px; right: 20px; color: white;">Go to Vogue Collage</a>
-
     </section>
   </main>
+
+  <!-- Navigation link placed outside the grid -->
+  <a href="page2.html" style="position: fixed; top: 20px; right: 20px; color: white; background: rgba(0,0,0,0.7); padding: 10px 15px; border-radius: 5px; text-decoration: none; z-index: 1000; font-weight: bold;">→ VOGUE</a>
+
 </body>
 </html>
+
