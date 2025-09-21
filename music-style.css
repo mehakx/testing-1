@@ -1,0 +1,343 @@
+/* Music Collage Page Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+    color: #ffffff;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.music-container {
+    position: relative;
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+/* Header Styles */
+.music-header {
+    text-align: center;
+    margin-bottom: 60px;
+    position: relative;
+    z-index: 10;
+}
+
+.music-header h1 {
+    font-size: 4rem;
+    font-weight: 800;
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 4s ease-in-out infinite;
+    margin-bottom: 10px;
+    letter-spacing: -2px;
+}
+
+.music-header p {
+    font-size: 1.2rem;
+    color: #b8b8b8;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* Navigation Styles */
+.page-navigation {
+    position: fixed;
+    top: 30px;
+    left: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+}
+
+.nav-link {
+    color: #888;
+    text-decoration: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    padding: 8px 12px;
+    border-radius: 5px;
+}
+
+.nav-link:hover {
+    color: #4ecdc4;
+    background: rgba(78, 205, 196, 0.1);
+}
+
+.nav-link.active {
+    color: #4ecdc4;
+    background: rgba(78, 205, 196, 0.2);
+}
+
+/* Album Grid */
+.album-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+    align-items: center;
+    justify-items: center;
+}
+
+.album-item {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.4));
+}
+
+/* Puzzle Piece Shapes */
+.album-item:nth-child(1) {
+    clip-path: polygon(0% 20%, 20% 20%, 20% 0%, 40% 0%, 40% 20%, 60% 20%, 60% 40%, 80% 40%, 80% 60%, 100% 60%, 100% 80%, 80% 80%, 80% 100%, 60% 100%, 60% 80%, 40% 80%, 40% 60%, 20% 60%, 20% 40%, 0% 40%);
+}
+
+.album-item:nth-child(2) {
+    clip-path: polygon(0% 0%, 80% 0%, 80% 20%, 100% 20%, 100% 40%, 80% 40%, 80% 60%, 60% 60%, 60% 80%, 40% 80%, 40% 100%, 20% 100%, 20% 80%, 0% 80%, 0% 60%, 20% 60%, 20% 40%, 0% 40%);
+}
+
+.album-item:nth-child(3) {
+    clip-path: polygon(20% 0%, 40% 0%, 40% 20%, 60% 20%, 60% 0%, 80% 0%, 80% 20%, 100% 20%, 100% 40%, 80% 40%, 80% 60%, 60% 60%, 60% 80%, 40% 80%, 40% 100%, 20% 100%, 20% 80%, 0% 80%, 0% 60%, 20% 60%, 20% 40%, 0% 40%, 0% 20%, 20% 20%);
+}
+
+.album-item:nth-child(4) {
+    clip-path: polygon(0% 0%, 20% 0%, 20% 20%, 40% 20%, 40% 0%, 60% 0%, 60% 20%, 80% 20%, 80% 40%, 100% 40%, 100% 60%, 80% 60%, 80% 80%, 60% 80%, 60% 100%, 40% 100%, 40% 80%, 20% 80%, 20% 60%, 0% 60%);
+}
+
+.album-item:nth-child(5) {
+    clip-path: polygon(0% 20%, 20% 20%, 20% 0%, 40% 0%, 40% 20%, 60% 20%, 60% 40%, 80% 40%, 80% 20%, 100% 20%, 100% 40%, 80% 40%, 80% 60%, 60% 60%, 60% 80%, 40% 80%, 40% 100%, 20% 100%, 20% 80%, 0% 80%, 0% 60%, 20% 60%, 20% 40%, 0% 40%);
+}
+
+.album-item:nth-child(6) {
+    clip-path: polygon(20% 0%, 40% 0%, 40% 20%, 60% 20%, 60% 40%, 80% 40%, 80% 60%, 100% 60%, 100% 80%, 80% 80%, 80% 100%, 60% 100%, 60% 80%, 40% 80%, 40% 60%, 20% 60%, 20% 40%, 0% 40%, 0% 20%, 20% 20%);
+}
+
+.album-item:nth-child(7) {
+    clip-path: polygon(0% 0%, 80% 0%, 80% 20%, 100% 20%, 100% 40%, 80% 40%, 80% 60%, 60% 60%, 60% 40%, 40% 40%, 40% 60%, 20% 60%, 20% 80%, 0% 80%, 0% 60%, 20% 60%, 20% 40%, 0% 40%, 0% 20%, 20% 20%, 20% 0%, 0% 0%);
+}
+
+.album-item:nth-child(8) {
+    clip-path: polygon(0% 20%, 20% 20%, 20% 0%, 40% 0%, 40% 20%, 60% 20%, 60% 0%, 80% 0%, 80% 20%, 100% 20%, 100% 40%, 80% 40%, 80% 60%, 60% 60%, 60% 80%, 40% 80%, 40% 100%, 20% 100%, 20% 80%, 0% 80%);
+}
+
+.album-item:nth-child(9) {
+    clip-path: polygon(20% 0%, 40% 0%, 40% 20%, 60% 20%, 60% 40%, 80% 40%, 80% 20%, 100% 20%, 100% 40%, 80% 40%, 80% 60%, 60% 60%, 60% 80%, 40% 80%, 40% 100%, 20% 100%, 20% 80%, 0% 80%, 0% 60%, 20% 60%, 20% 40%, 0% 40%, 0% 20%, 20% 20%);
+}
+
+.album-item:nth-child(10) {
+    clip-path: polygon(0% 0%, 20% 0%, 20% 20%, 40% 20%, 40% 40%, 60% 40%, 60% 20%, 80% 20%, 80% 0%, 100% 0%, 100% 20%, 80% 20%, 80% 40%, 60% 40%, 60% 60%, 40% 60%, 40% 80%, 20% 80%, 20% 100%, 0% 100%, 0% 80%, 20% 80%, 20% 60%, 0% 60%);
+}
+
+.album-item:nth-child(11) {
+    clip-path: polygon(0% 20%, 20% 20%, 20% 40%, 40% 40%, 40% 20%, 60% 20%, 60% 0%, 80% 0%, 80% 20%, 100% 20%, 100% 40%, 80% 40%, 80% 60%, 60% 60%, 60% 80%, 40% 80%, 40% 100%, 20% 100%, 20% 80%, 0% 80%);
+}
+
+.album-item:nth-child(12) {
+    clip-path: polygon(20% 0%, 40% 0%, 40% 20%, 60% 20%, 60% 40%, 80% 40%, 80% 60%, 100% 60%, 100% 80%, 80% 80%, 80% 100%, 60% 100%, 60% 80%, 40% 80%, 40% 60%, 20% 60%, 20% 40%, 0% 40%, 0% 20%, 20% 20%);
+}
+
+.album-item:nth-child(13) {
+    clip-path: polygon(0% 0%, 80% 0%, 80% 20%, 100% 20%, 100% 40%, 80% 40%, 80% 60%, 60% 60%, 60% 40%, 40% 40%, 40% 60%, 20% 60%, 20% 80%, 40% 80%, 40% 100%, 20% 100%, 20% 80%, 0% 80%);
+}
+
+.album-item:nth-child(14) {
+    clip-path: polygon(0% 20%, 20% 20%, 20% 0%, 40% 0%, 40% 20%, 60% 20%, 60% 40%, 80% 40%, 80% 20%, 100% 20%, 100% 40%, 80% 40%, 80% 60%, 60% 60%, 60% 80%, 40% 80%, 40% 100%, 20% 100%, 20% 80%, 0% 80%);
+}
+
+.album-item:nth-child(15) {
+    clip-path: polygon(20% 0%, 40% 0%, 40% 20%, 60% 20%, 60% 0%, 80% 0%, 80% 20%, 100% 20%, 100% 40%, 80% 40%, 80% 60%, 60% 60%, 60% 80%, 40% 80%, 40% 100%, 20% 100%, 20% 80%, 0% 80%, 0% 60%, 20% 60%, 20% 40%, 0% 40%, 0% 20%, 20% 20%);
+}
+
+.album-item:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.album-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.4s ease;
+}
+
+.album-item:hover img {
+    transform: scale(1.1);
+    filter: brightness(0.4) saturate(1.2);
+}
+
+/* Album Overlay */
+.album-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(0, 0, 0, 0.8) 0%,
+        rgba(78, 205, 196, 0.3) 50%,
+        rgba(255, 107, 107, 0.3) 100%
+    );
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: all 0.4s ease;
+    backdrop-filter: blur(5px);
+}
+
+.album-item:hover .album-overlay {
+    opacity: 1;
+}
+
+.lyric-text {
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 0 20px;
+    line-height: 1.4;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    transform: translateY(20px);
+    transition: all 0.4s ease 0.1s;
+}
+
+.album-item:hover .lyric-text {
+    transform: translateY(0);
+}
+
+.album-info {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #4ecdc4;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border: 2px solid #4ecdc4;
+    padding: 8px 16px;
+    border-radius: 20px;
+    background: rgba(78, 205, 196, 0.1);
+    transform: translateY(20px);
+    transition: all 0.4s ease 0.2s;
+}
+
+.album-item:hover .album-info {
+    transform: translateY(0);
+}
+
+/* Footer */
+.music-footer {
+    margin-top: 80px;
+    text-align: center;
+    padding: 40px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-text p {
+    font-size: 1.1rem;
+    color: #888;
+    margin-bottom: 10px;
+    font-weight: 300;
+    font-style: italic;
+}
+
+/* Corner Elements */
+.corner-element {
+    position: fixed;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #444;
+    letter-spacing: 2px;
+    z-index: 100;
+}
+
+.top-left {
+    top: 30px;
+    right: 30px;
+}
+
+.top-right {
+    top: 60px;
+    right: 30px;
+}
+
+.bottom-left {
+    bottom: 30px;
+    left: 30px;
+}
+
+.bottom-right {
+    bottom: 30px;
+    right: 30px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .music-header h1 {
+        font-size: 2.5rem;
+    }
+    
+    .album-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+    }
+    
+    .lyric-text {
+        font-size: 1.2rem;
+    }
+    
+    .page-navigation {
+        position: relative;
+        top: auto;
+        left: auto;
+        flex-direction: row;
+        justify-content: center;
+        margin-bottom: 40px;
+        background: rgba(0, 0, 0, 0.6);
+    }
+    
+    .corner-element {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .album-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+    }
+    
+    .lyric-text {
+        font-size: 1rem;
+        padding: 0 15px;
+    }
+    
+    .music-header h1 {
+        font-size: 2rem;
+    }
+}
