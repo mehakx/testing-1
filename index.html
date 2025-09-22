@@ -1,168 +1,241 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Fragments of Fame — Color Collage</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --gap: 14px;
-      --depth: 6cm;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      background: #0d0d0f;
-      color: #f4f4f4;
-      font-family: "Inter", sans-serif;
-      line-height: 1.45;
-    }
-    header {
-      padding: 20px;
-      border-bottom: 1px solid #333;
-    }
-    h1 { margin: 0; font-weight: 800; }
-
-    main {
-      padding: 20px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr );
-      grid-auto-rows: 120px;
-      gap: var(--gap);
-      background:
-        repeating-linear-gradient(#333 0 1px, transparent 1px 120px),
-        repeating-linear-gradient(90deg, #333 0 1px, transparent 1px 120px);
-      background-blend-mode: lighten;
-    }
-
-    .block {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px;
-      font-weight: 700;
-      text-align: center;
-      border: 2px solid #222;
-      background: #15151a;
-    }
-
-    /* colorful blocks */
-    .color1 { background: linear-gradient(135deg, #ff5f6d, #ffc371); }
-    .color2 { background: linear-gradient(135deg, #24c6dc, #514a9d); }
-    .color3 { background: linear-gradient(135deg, #00f260, #0575e6); }
-    .color4 { background: linear-gradient(135deg, #e1eec3, #f05053); }
-    .color5 { background: conic-gradient(from 90deg, #ff00ff, #00e5ff, #ff7ad9, #ff00ff); }
-    .color6 { background: radial-gradient(circle at top left, #ff6a00, #ee0979); }
-    .color7 { background: repeating-linear-gradient(45deg, #222, #222 10px, #ff3d7b 10px, #ff3d7b 20px); }
-    .color8 { background: linear-gradient(to right, #00c6ff, #0072ff); }
-    .color9 { background: linear-gradient(45deg, #11998e, #38ef7d); }
-    .color10 { background: linear-gradient(45deg, #fc6076, #ff9a44); }
-
-    /* transforms to make it feel alive */
-    .tilt-fwd { transform: perspective(var(--depth)) rotateX(25deg); }
-    .tilt-back { transform: perspective(var(--depth)) rotateX(-25deg); }
-    .slide { transform: perspective(var(--depth)) translateX(20px) rotateZ(5deg); }
-
-    /* grid placement */
-    .hero { grid-column: 1 / -1; grid-row: span 2; }
-    .a { grid-column: 1 / span 3; grid-row: span 2; }
-    .b { grid-column: 4 / span 3; grid-row: span 3; }
-    .c { grid-column: 7 / span 3; grid-row: span 2; }
-    .d { grid-column: 10 / span 3; grid-row: span 2; }
-    .e { grid-column: 1 / span 2; }
-    .f { grid-column: 3 / span 2; }
-    .g { grid-column: 5 / span 2; }
-    .h { grid-column: 7 / span 2; }
-    .i { grid-column: 9 / span 2; }
-    .j { grid-column: 11 / span 2; }
-
-    /* Navigation Styling */
-    .page-navigation {
-      position: fixed;
-      top: 30px;
-      right: 30px;
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(10px);
-      border-radius: 10px;
-      padding: 15px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      z-index: 1000;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .page-navigation a {
-      color: #f4f4f4;
-      text-decoration: none;
-      padding: 8px 12px;
-      border-radius: 5px;
-      transition: all 0.3s ease;
-      font-weight: 500;
-      font-size: 14px;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-    }
-
-    .page-navigation a:hover {
-      background: rgba(255, 255, 255, 0.1);
-      transform: translateX(5px);
-    }
-
-    .page-navigation a[href="index.html"] {
-      background: linear-gradient(135deg, #ff5f6d, #ffc371);
-      color: white;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .page-navigation {
-        top: 20px;
-        right: 20px;
-        padding: 10px;
-      }
-      .page-navigation a {
-        font-size: 12px;
-        padding: 6px 10px;
-      }
-    }
-
-  </style>
+  <title>Page 2 — VOGUE // Deconstructed Collage</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200;300;400;500;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Bebas+Neue&family=Anton&family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="page2-style.css" />
 </head>
 <body>
-  <header>
-    <h1>Fragments of Fame</h1>
-  </header>
+  <div class="site-wrap deconstructed-container">
+    <!-- Header / Navigation (hypertext) -->
+    <header class="site-header">
+      <nav class="site-nav" aria-label="Primary">
+        <a href="index.html">Page 1 — Newsstand</a>
+        <a href="page2.html" aria-current="page">Page 2 — Deconstructed</a>
+        <a href="memory.html">Page 3 — Memory</a>
+      </nav>
+    </header>
 
-  <main>
-    <section class="grid">
-      <div class="block hero">fame /feɪm/ — "to be known, to be seen"</div>
+    <!-- Decorative texture layers (presentation only) -->
+    <div class="texture-layer layer-1" aria-hidden="true"></div>
+    <div class="texture-layer layer-2" aria-hidden="true"></div>
+    <div class="texture-layer layer-3" aria-hidden="true"></div>
 
-      <div class="block color1 a tilt-fwd">visibility</div>
-      <div class="block color2 b tilt-back">pressure</div>
-      <div class="block color3 c slide">glamour</div>
-      <div class="block color4 d">surveillance</div>
-      <div class="block color5 e">chaos</div>
-      <div class="block color6 f">self</div>
-      <div class="block color7 g">other</div>
-      <div class="block color8 h">noise</div>
-      <div class="block color9 i">desire</div>
-      <div class="block color10 j">escape</div>
-    </section>
-  </main>
+    <main id="main" class="page-content" tabindex="-1">
+      <!-- Intro text (counts toward 3+ text blocks) -->
+      <section class="intro text-block">
+        <h1 class="sr-only">VOGUE — Deconstructed Collage</h1>
+        <p><strong>Deconstructed:</strong> a collage built from magazine culture. Each cover is a link — a fragment that branches to memory, context, and tone.</p>
+        <p><strong>How to explore:</strong> hover to reveal overlays; click a cover to jump to a related section on the Memory page. This is hypertext as collage — non-linear, curious, alive.</p>
+        <p><strong>Design note:</strong> scale and position create meaning. Large tiles call attention; small tiles whisper. The typography elements act as scaffolding, not headlines.</p>
+      </section>
 
-  <nav class="page-navigation">
-    <a href="index.html">01 // FRAGMENTS</a>
-    <a href="page2.html">02 // VOGUE</a>
-    <a href="music-page.html">03 // SONIC</a>
-  </nav>
+      <!-- Main collage grid -->
+      <section class="static-collage-grid" aria-label="Deconstructed collage grid">
+        <!-- Main VOGUE typography (decorative wordmark) -->
+        <div class="typo-element typo-main" aria-hidden="true">
+          <span class="letter l1" aria-hidden="true">V</span>
+          <span class="letter l2" aria-hidden="true">O</span>
+          <span class="letter l3" aria-hidden="true">G</span>
+          <span class="letter l4" aria-hidden="true">U</span>
+          <span class="letter l5" aria-hidden="true">E</span>
+        </div>
 
+        <!-- FASHION typography (decorative) -->
+        <div class="typo-element typo-fashion" aria-hidden="true">
+          <div class="word-fragment wf1">FASH</div>
+          <div class="word-fragment wf2">ION</div>
+        </div>
+
+        <!-- CULTURE / IDENTITY stack (decorative) -->
+        <div class="typo-element typo-culture" aria-hidden="true">
+          <div class="stacked-text">
+            <div class="stack-line">CULT</div>
+            <div class="stack-line">URE</div>
+            <div class="stack-line">IDEN</div>
+            <div class="stack-line">TITY</div>
+          </div>
+        </div>
+
+        <!-- Magazine covers (≥10 images) — now semantic figures with links (hypertext) -->
+        <figure class="magazine-cover cover-1">
+          <a href="memory.html#butterfly" aria-label="Open Butterfly Effect details">
+            <img src="images/Screenshot2025-09-20at1.38.44PM.png"
+                 alt="Vogue cover: model framed by abstract butterfly wings over the ocean. Headline: Butterfly Effect." />
+          </a>
+          <figcaption><strong>Butterfly Effect</strong> — motion as identity</figcaption>
+        </figure>
+
+        <figure class="magazine-cover cover-2">
+          <a href="memory.html#glamour" aria-label="Open Glamour Freedom details">
+            <img src="images/Screenshot2025-09-20at1.35.33PM.png"
+                 alt="Vogue cover: high-gloss beauty portrait with dramatic light. Subhead: Freedom." />
+          </a>
+          <figcaption><strong>Glamour</strong> — freedom in the frame</figcaption>
+        </figure>
+
+        <figure class="magazine-cover cover-3">
+          <a href="memory.html#evolution" aria-label="Open Evolution Theory details">
+            <img src="images/Screenshot2025-09-20at1.36.35PM.png"
+                 alt="Vogue cover exploring evolution with layered typography and shifting silhouettes. Headline: Evolution Theory." />
+          </a>
+          <figcaption><strong>Evolution</strong> — theory in motion</figcaption>
+        </figure>
+
+        <figure class="magazine-cover cover-4">
+          <a href="memory.html#tyla" aria-label="Open Tyla Headliners details">
+            <img src="images/Screenshot2025-09-20at1.37.52PM.png"
+                 alt="Vogue cover featuring Tyla styled for a headlining performance. Subhead: Headliners." />
+          </a>
+          <figcaption><strong>Tyla</strong> — headliners, center stage</figcaption>
+        </figure>
+
+        <figure class="magazine-cover cover-5">
+          <a href="memory.html#movement" aria-label="Open Movement Singapore details">
+            <img src="images/Screenshot2025-09-20at1.38.25PM.png"
+                 alt="Vogue Singapore cover emphasizing movement with dynamic pose and motion blur. Headline: Movement." />
+          </a>
+          <figcaption><strong>Movement</strong> — Singapore edition</figcaption>
+        </figure>
+
+        <figure class="magazine-cover cover-6">
+          <a href="memory.html#beauty" aria-label="Open Beauty Thailand details">
+            <img src="images/Screenshot2025-09-20at1.36.15PM.png"
+                 alt="Vogue Thailand beauty cover: luminous skin close-up, glossy styling. Headline: Beauty." />
+          </a>
+          <figcaption><strong>Beauty</strong> — Thailand’s lens</figcaption>
+        </figure>
+
+        <figure class="magazine-cover cover-7">
+          <a href="memory.html#addicted" aria-label="Open Addicted Paris details">
+            <img src="images/Screenshot2025-09-20at1.35.46PM.png"
+                 alt="Vogue Paris cover with bold 'Addicted' headline and stark styling." />
+          </a>
+          <figcaption><strong>Addicted</strong> — Paris intensity</figcaption>
+        </figure>
+
+        <figure class="magazine-cover cover-8">
+          <a href="memory.html#memories" aria-label="Open Memories Portugal details">
+            <img src="images/Screenshot2025-09-20at1.37.08PM.png"
+                 alt="Vogue Portugal cover themed around memories with soft film-like color." />
+          </a>
+          <figcaption><strong>Memories</strong> — Portugal’s archive</figcaption>
+        </figure>
+
+        <figure class="magazine-cover cover-9">
+          <a href="memory.html#futuro" aria-label="Open El Futuro España details">
+            <img src="images/Screenshot2025-09-20at1.38.06PM.png"
+                 alt="Vogue España cover with the headline 'El Futuro' in bold editorial type." />
+          </a>
+          <figcaption><strong>El Futuro</strong> — España, forward</figcaption>
+        </figure>
+
+        <figure class="magazine-cover cover-10">
+          <a href="memory.html#baguio" aria-label="Open Baguio Beyond details">
+            <img src="images/Screenshot2025-09-20at1.36.26PM.png"
+                 alt="Vogue cover highlighting Baguio with landscape tones and layered type. Subhead: Beyond." />
+          </a>
+          <figcaption><strong>Baguio</strong> — beyond the frame</figcaption>
+        </figure>
+
+        <figure class="magazine-cover cover-11">
+          <a href="memory.html#billie" aria-label="Open The Greatest — Billie Eilish details">
+            <img src="images/Screenshot2025-09-20at1.38.57PM.png"
+                 alt="Vogue cover featuring Billie Eilish with the headline 'The Greatest'." />
+          </a>
+          <figcaption><strong>The Greatest</strong> — Billie Eilish</figcaption>
+        </figure>
+
+        <figure class="magazine-cover cover-12">
+          <a href="memory.html#beyonce" aria-label="Open Beyoncé Red Hot details">
+            <img src="images/Screenshot2025-09-20at1.37.36PM.png"
+                 alt="Vogue cover of Beyoncé in a saturated red palette. Subhead: Red Hot." />
+          </a>
+          <figcaption><strong>Beyoncé</strong> — red hot</figcaption>
+        </figure>
+
+        <figure class="magazine-cover cover-13">
+          <a href="memory.html#zendaya" aria-label="Open Zendaya Fly High details">
+            <img src="images/Screenshot2025-09-20at1.35.09PM.png"
+                 alt="Vogue cover of Zendaya with an elevated 'Fly High' concept." />
+          </a>
+          <figcaption><strong>Zendaya</strong> — fly high</figcaption>
+        </figure>
+
+        <figure class="magazine-cover cover-14">
+          <a href="memory.html#philippines" aria-label="Open Philippines Issue details">
+            <img src="images/Screenshot2025-09-20at1.36.26PM.png"
+                 alt="Vogue Philippines issue with regional editorial styling and serif masthead." />
+          </a>
+          <figcaption><strong>Philippines</strong> — issue focus</figcaption>
+        </figure>
+      </section>
+
+      <!-- Scattered text / glitch labels (now semantic) -->
+      <aside class="scattered-chaos" aria-label="Ambient collage labels">
+        <ul class="chaos-words" aria-label="Theme words">
+          <li class="chaos-text ct1">AUTHENTICITY</li>
+          <li class="chaos-text ct2">NOISE</li>
+          <li class="chaos-text ct3">SIGNAL</li>
+          <li class="chaos-text ct4">MEMORY</li>
+          <li class="chaos-text ct5">TONE</li>
+          <li class="chaos-text ct6">COLOR</li>
+          <li class="chaos-text ct7">TRUST</li>
+          <li class="chaos-text ct8">VOICE</li>
+          <li class="chaos-text ct9">RANGE</li>
+          <li class="chaos-text ct10">FUTURE</li>
+        </ul>
+
+        <ul class="glitch-flags" aria-label="Glitch system flags">
+          <li class="glitch-element ge1">ERROR_404</li>
+          <li class="glitch-element ge2">SYSTEM.CRASH</li>
+          <li class="glitch-element ge3">LOADING…</li>
+          <li class="glitch-element ge4">CORRUPTED</li>
+          <li class="glitch-element ge5">NULL_VOID</li>
+        </ul>
+
+        <!-- Decorative shapes only -->
+        <div class="geo-shape gs1" aria-hidden="true"></div>
+        <div class="geo-shape gs2" aria-hidden="true"></div>
+        <div class="geo-shape gs3" aria-hidden="true"></div>
+        <div class="geo-shape gs4" aria-hidden="true"></div>
+        <div class="geo-shape gs5" aria-hidden="true"></div>
+      </aside>
+
+      <!-- Subtle distortion effects (decorative) -->
+      <div class="distortion-effects" aria-hidden="true">
+        <div class="static-block sb1"></div>
+        <div class="static-block sb2"></div>
+        <div class="static-block sb3"></div>
+      </div>
+
+      <!-- Corner labels (styled text; visible content) -->
+      <section class="corner-labels" aria-label="Page markers">
+        <span class="corner-element top-left">DECONSTRUCTED</span>
+        <span class="corner-element top-right">TYPOGRAPHY</span>
+        <span class="corner-element bottom-left">EXPERIMENTAL</span>
+        <span class="corner-element bottom-right">PAGE 02</span>
+      </section>
+
+      <!-- User instructions (text block) -->
+      <section class="instructions" aria-label="Interaction instructions">
+        <p class="instruction">Hover tiles for overlays.</p>
+        <p class="instruction">Press <kbd>Space</kbd> to shuffle labels.</p>
+        <p class="instruction">Press <kbd>G</kbd> for global glitch.</p>
+      </section>
+    </main>
+
+    <!-- Footer with credits (required for found/AI media) -->
+    <footer class="site-footer">
+      <p><strong>Credits:</strong> Vogue covers used for educational collage. Link to sources or photographer credits here. Mark any AI-generated or AI-modified media explicitly.</p>
+      <p>© Your Name. Built with semantic HTML, CSS Grid, and light JS interactions.</p>
+    </footer>
+  </div>
+
+  <script src="page2-script.js" defer></script>
 </body>
 </html>
 
