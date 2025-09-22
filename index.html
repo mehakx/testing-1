@@ -4,10 +4,214 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Windows to the World — Urban Fragments</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background: #000000;
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .main-header {
+            text-align: center;
+            padding: 40px 20px 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .main-header h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+
+        .main-header p {
+            font-size: 1.2rem;
+            color: #cccccc;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+        }
+
+        /* Navigation */
+        .page-navigation {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .nav-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 0.9rem;
+            font-weight: normal;
+            padding: 8px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #ffffff;
+        }
+
+        /* Apartment Building */
+        .apartment-building {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh;
+            padding: 40px 20px;
+        }
+
+        .building-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(4, 1fr);
+            gap: 15px;
+            max-width: 1000px;
+            width: 100%;
+            height: 600px;
+            background: rgba(20, 20, 20, 0.5);
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Window Frame Base */
+        .window-frame {
+            position: relative;
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(30, 30, 30, 0.8);
+        }
+
+        .window-frame:hover {
+            transform: scale(1.02);
+            border-color: #ffffff;
+        }
+
+        /* Window Images */
+        .window-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.3s ease;
+        }
+
+        /* City Preview - Simple Image Replacement */
+        .window-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .window-frame:hover .window-overlay {
+            opacity: 1;
+        }
+
+        .window-frame:hover .window-image {
+            opacity: 0;
+        }
+
+        .city-preview {
+            width: 100%;
+            height: 100%;
+        }
+
+        .city-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Hide city info text */
+        .city-info {
+            display: none;
+        }
+
+        /* Window Sizes */
+        .large-window { grid-column: span 2; grid-row: span 1; }
+        .tall-window { grid-column: span 1; grid-row: span 2; }
+        .wide-window { grid-column: span 2; grid-row: span 1; }
+        .panoramic-window { grid-column: span 3; grid-row: span 1; }
+        .medium-window { grid-column: span 1; grid-row: span 1; }
+        .plant-window { grid-column: span 1; grid-row: span 2; }
+        .silhouette-window { grid-column: span 2; grid-row: span 1; }
+        .study-window { grid-column: span 2; grid-row: span 1; }
+        .small-window { grid-column: span 1; grid-row: span 1; }
+        .blue-window { grid-column: span 1; grid-row: span 1; }
+        .narrow-window { grid-column: span 1; grid-row: span 2; }
+
+        /* Footer */
+        .main-footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #888;
+        }
+
+        .footer-content p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        /* Corner Elements */
+        .corner-element {
+            position: fixed;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: normal;
+            z-index: 100;
+        }
+
+        .top-left { top: 20px; left: 20px; }
+        .top-right { top: 20px; right: 200px; }
+        .bottom-left { bottom: 20px; left: 20px; }
+        .bottom-right { bottom: 20px; right: 20px; }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-header h1 { font-size: 2.5rem; }
+            .building-container {
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: repeat(5, 1fr);
+                max-width: 600px;
+                height: 600px;
+                gap: 10px;
+                padding: 15px;
+            }
+            .page-navigation {
+                position: static;
+                justify-content: center;
+                margin: 20px 0;
+            }
+            .corner-element { display: none; }
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -27,148 +231,104 @@
     <main class="apartment-building">
         <div class="building-container">
             <!-- Top Row -->
-            <div class="window-frame large-window" data-city="NYC Night" data-description="Purple neon dreams and city lights">
+            <div class="window-frame large-window">
                 <img src="window-images/window1.png" alt="Cozy apartment window with warm lighting" class="window-image">
                 <div class="window-overlay">
                     <div class="city-preview">
                         <img src="city-images/city1.png" alt="NYC nighttime with purple neon lights">
                     </div>
-                    <div class="city-info">
-                        <h3>NYC Night</h3>
-                        <p>Purple neon dreams and city lights</p>
-                    </div>
                 </div>
             </div>
 
-            <div class="window-frame tall-window" data-city="Italian Kitchen" data-description="Authentic pasta and warm hospitality">
+            <div class="window-frame tall-window">
                 <img src="window-images/window2.png" alt="Kitchen window with blue lighting" class="window-image">
                 <div class="window-overlay">
                     <div class="city-preview">
                         <img src="city-images/city2.png" alt="Italian chef making fresh pasta">
                     </div>
-                    <div class="city-info">
-                        <h3>Italian Kitchen</h3>
-                        <p>Authentic pasta and warm hospitality</p>
-                    </div>
                 </div>
             </div>
 
-            <div class="window-frame wide-window" data-city="Paris Café" data-description="String lights and evening conversations">
+            <div class="window-frame wide-window">
                 <img src="window-images/window3.png" alt="Living room window with plants" class="window-image">
                 <div class="window-overlay">
                     <div class="city-preview">
                         <img src="city-images/city3.png" alt="Parisian café with string lights">
                     </div>
-                    <div class="city-info">
-                        <h3>Paris Café</h3>
-                        <p>String lights and evening conversations</p>
-                    </div>
                 </div>
             </div>
 
             <!-- Second Row -->
-            <div class="window-frame panoramic-window" data-city="Tropical Market" data-description="Colorful coconuts and island vibes">
+            <div class="window-frame panoramic-window">
                 <img src="window-images/window4.png" alt="Wide apartment window with city view" class="window-image">
                 <div class="window-overlay">
                     <div class="city-preview">
                         <img src="city-images/city4.png" alt="Tropical market with colorful coconuts">
                     </div>
-                    <div class="city-info">
-                        <h3>Tropical Market</h3>
-                        <p>Colorful coconuts and island vibes</p>
-                    </div>
                 </div>
             </div>
 
-            <div class="window-frame medium-window" data-city="Manhattan Day" data-description="Classic architecture and yellow cabs">
+            <div class="window-frame medium-window">
                 <img src="window-images/window5.png" alt="Multi-pane window with warm interior" class="window-image">
                 <div class="window-overlay">
                     <div class="city-preview">
                         <img src="city-images/city5.png" alt="Manhattan street with Empire State Building">
                     </div>
-                    <div class="city-info">
-                        <h3>Manhattan Day</h3>
-                        <p>Classic architecture and yellow cabs</p>
-                    </div>
                 </div>
             </div>
 
-            <div class="window-frame plant-window" data-city="Little Italy" data-description="Festival crowds and community spirit">
+            <div class="window-frame plant-window">
                 <img src="window-images/window6.png" alt="Window with plants and green lighting" class="window-image">
                 <div class="window-overlay">
                     <div class="city-preview">
                         <img src="city-images/city6.png" alt="Little Italy street festival">
                     </div>
-                    <div class="city-info">
-                        <h3>Little Italy</h3>
-                        <p>Festival crowds and community spirit</p>
-                    </div>
                 </div>
             </div>
 
             <!-- Third Row -->
-            <div class="window-frame silhouette-window" data-city="Café Culture" data-description="Cozy corners and furry friends">
+            <div class="window-frame silhouette-window">
                 <img src="window-images/window7.png" alt="Window with silhouette figure" class="window-image">
                 <div class="window-overlay">
                     <div class="city-preview">
                         <img src="city-images/city7.png" alt="Café scene with dog on colorful tiles">
                     </div>
-                    <div class="city-info">
-                        <h3>Café Culture</h3>
-                        <p>Cozy corners and furry friends</p>
-                    </div>
                 </div>
             </div>
 
-            <div class="window-frame study-window" data-city="Academic Life" data-description="Students, plants, and late-night studies">
+            <div class="window-frame study-window">
                 <img src="window-images/window8.png" alt="Multi-pane window with interior lighting" class="window-image">
                 <div class="window-overlay">
                     <div class="city-preview">
                         <img src="city-images/city8.png" alt="Students studying with plants and papers">
                     </div>
-                    <div class="city-info">
-                        <h3>Academic Life</h3>
-                        <p>Students, plants, and late-night studies</p>
-                    </div>
                 </div>
             </div>
 
             <!-- Bottom Row -->
-            <div class="window-frame small-window" data-city="Sports Culture" data-description="Yankees pride and NYC tradition">
+            <div class="window-frame small-window">
                 <img src="window-images/window9.png" alt="Small multi-pane window" class="window-image">
                 <div class="window-overlay">
                     <div class="city-preview">
                         <img src="city-images/city9.png" alt="Yankees store window display">
                     </div>
-                    <div class="city-info">
-                        <h3>Sports Culture</h3>
-                        <p>Yankees pride and NYC tradition</p>
-                    </div>
                 </div>
             </div>
 
-            <div class="window-frame blue-window" data-city="Central Park" data-description="Sunny trees and urban nature">
+            <div class="window-frame blue-window">
                 <img src="window-images/window10.png" alt="Window with blue lighting" class="window-image">
                 <div class="window-overlay">
                     <div class="city-preview">
                         <img src="city-images/city10.png" alt="Central Park trees and sunlight">
                     </div>
-                    <div class="city-info">
-                        <h3>Central Park</h3>
-                        <p>Sunny trees and urban nature</p>
-                    </div>
                 </div>
             </div>
 
-            <div class="window-frame narrow-window" data-city="Literary World" data-description="Vogue magazines and cultural books">
+            <div class="window-frame narrow-window">
                 <img src="window-images/window11.png" alt="Tall narrow window" class="window-image">
                 <div class="window-overlay">
                     <div class="city-preview">
                         <img src="city-images/city11.png" alt="Bookstore with Vogue magazines">
-                    </div>
-                    <div class="city-info">
-                        <h3>Literary World</h3>
-                        <p>Vogue magazines and cultural books</p>
                     </div>
                 </div>
             </div>
@@ -192,3 +352,4 @@
     <script src="script.js"></script>
 </body>
 </html>
+
