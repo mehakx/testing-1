@@ -22,13 +22,13 @@
         /* Header */
         .main-header {
             text-align: center;
-            padding: 40px 20px 20px;
+            padding: 30px 20px 20px;
             position: relative;
             z-index: 10;
         }
 
         .main-header h1 {
-            font-size: 3.5rem;
+            font-size: 3rem;
             font-weight: bold;
             color: #ffffff;
             margin-bottom: 10px;
@@ -36,7 +36,7 @@
         }
 
         .main-header p {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: #cccccc;
             font-weight: normal;
             letter-spacing: 0.5px;
@@ -45,10 +45,10 @@
         /* Navigation */
         .page-navigation {
             position: fixed;
-            top: 30px;
-            right: 30px;
+            top: 20px;
+            right: 20px;
             display: flex;
-            gap: 15px;
+            gap: 10px;
             z-index: 1000;
         }
 
@@ -56,11 +56,11 @@
             color: #ffffff;
             text-decoration: none;
             font-family: 'Times New Roman', Times, serif;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             font-weight: normal;
-            padding: 8px 16px;
+            padding: 6px 12px;
             border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 4px;
+            border-radius: 3px;
             transition: all 0.3s ease;
             background: rgba(0, 0, 0, 0.8);
         }
@@ -75,22 +75,21 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 80vh;
-            padding: 40px 20px;
+            min-height: 70vh;
+            padding: 20px;
         }
 
         .building-container {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-template-rows: repeat(4, 1fr);
-            gap: 15px;
-            max-width: 1000px;
             width: 100%;
-            height: 600px;
-            background: rgba(20, 20, 20, 0.5);
+            max-width: 1400px;
+            height: 450px;
+            background: #000000;
+            position: relative;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 20px;
             padding: 30px;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         /* Window Frame Base */
@@ -100,20 +99,21 @@
             overflow: hidden;
             cursor: pointer;
             transition: all 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            background: rgba(30, 30, 30, 0.8);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            background: rgba(30, 30, 30, 0.9);
         }
 
         .window-frame:hover {
-            transform: scale(1.02);
+            transform: scale(1.05);
             border-color: #ffffff;
+            z-index: 10;
         }
 
         /* Window Images */
         .window-image {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             transition: opacity 0.3s ease;
         }
 
@@ -144,31 +144,28 @@
         .city-preview img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
         }
 
-        /* Hide city info text */
-        .city-info {
-            display: none;
-        }
+        /* Specific Window Positions - Horizontal Layout */
+        .window-1 { grid-column: 1; grid-row: 1; }
+        .window-2 { grid-column: 2; grid-row: 1; }
+        .window-3 { grid-column: 3 / span 2; grid-row: 1; }
+        .window-4 { grid-column: 5; grid-row: 1; }
+        .window-5 { grid-column: 6; grid-row: 1; }
 
-        /* Window Sizes */
-        .large-window { grid-column: span 2; grid-row: span 1; }
-        .tall-window { grid-column: span 1; grid-row: span 2; }
-        .wide-window { grid-column: span 2; grid-row: span 1; }
-        .panoramic-window { grid-column: span 3; grid-row: span 1; }
-        .medium-window { grid-column: span 1; grid-row: span 1; }
-        .plant-window { grid-column: span 1; grid-row: span 2; }
-        .silhouette-window { grid-column: span 2; grid-row: span 1; }
-        .study-window { grid-column: span 2; grid-row: span 1; }
-        .small-window { grid-column: span 1; grid-row: span 1; }
-        .blue-window { grid-column: span 1; grid-row: span 1; }
-        .narrow-window { grid-column: span 1; grid-row: span 2; }
+        .window-6 { grid-column: 1; grid-row: 2; }
+        .window-7 { grid-column: 2 / span 2; grid-row: 2; }
+        .window-8 { grid-column: 4; grid-row: 2; }
+        .window-9 { grid-column: 5 / span 2; grid-row: 2; }
+
+        .window-10 { grid-column: 2; grid-row: 3; }
+        .window-11 { grid-column: 4 / span 2; grid-row: 3; }
 
         /* Footer */
         .main-footer {
             text-align: center;
-            padding: 40px 20px;
+            padding: 30px 20px;
             color: #888;
         }
 
@@ -182,32 +179,46 @@
         .corner-element {
             position: fixed;
             font-family: 'Times New Roman', Times, serif;
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.5);
             font-weight: normal;
             z-index: 100;
         }
 
-        .top-left { top: 20px; left: 20px; }
-        .top-right { top: 20px; right: 200px; }
-        .bottom-left { bottom: 20px; left: 20px; }
-        .bottom-right { bottom: 20px; right: 20px; }
+        .top-left { top: 15px; left: 15px; }
+        .top-right { top: 15px; right: 180px; }
+        .bottom-left { bottom: 15px; left: 15px; }
+        .bottom-right { bottom: 15px; right: 15px; }
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .main-header h1 { font-size: 2.5rem; }
-            .building-container {
-                grid-template-columns: repeat(3, 1fr);
-                grid-template-rows: repeat(5, 1fr);
-                max-width: 600px;
-                height: 600px;
-                gap: 10px;
-                padding: 15px;
+            .main-header h1 { font-size: 2rem; }
+            .building-container { 
+                height: 350px;
+                max-width: 100%;
+                grid-template-columns: repeat(4, 1fr);
+                grid-template-rows: repeat(4, 1fr);
+                gap: 15px;
+                padding: 20px;
             }
+            
+            /* Mobile window positions */
+            .window-1 { grid-column: 1; grid-row: 1; }
+            .window-2 { grid-column: 2; grid-row: 1; }
+            .window-3 { grid-column: 3 / span 2; grid-row: 1; }
+            .window-4 { grid-column: 1; grid-row: 2; }
+            .window-5 { grid-column: 2; grid-row: 2; }
+            .window-6 { grid-column: 3; grid-row: 2; }
+            .window-7 { grid-column: 4; grid-row: 2; }
+            .window-8 { grid-column: 1 / span 2; grid-row: 3; }
+            .window-9 { grid-column: 3; grid-row: 3; }
+            .window-10 { grid-column: 4; grid-row: 3; }
+            .window-11 { grid-column: 2 / span 2; grid-row: 4; }
+            
             .page-navigation {
                 position: static;
                 justify-content: center;
-                margin: 20px 0;
+                margin: 15px 0;
             }
             .corner-element { display: none; }
         }
@@ -231,7 +242,7 @@
     <main class="apartment-building">
         <div class="building-container">
             <!-- Top Row -->
-            <div class="window-frame large-window">
+            <div class="window-frame window-1">
                 <img src="window-images/window1.png" alt="Cozy apartment window with warm lighting" class="window-image">
                 <div class="window-overlay">
                     <div class="city-preview">
@@ -240,7 +251,7 @@
                 </div>
             </div>
 
-            <div class="window-frame tall-window">
+            <div class="window-frame window-2">
                 <img src="window-images/window2.png" alt="Kitchen window with blue lighting" class="window-image">
                 <div class="window-overlay">
                     <div class="city-preview">
@@ -249,7 +260,7 @@
                 </div>
             </div>
 
-            <div class="window-frame wide-window">
+            <div class="window-frame window-3">
                 <img src="window-images/window3.png" alt="Living room window with plants" class="window-image">
                 <div class="window-overlay">
                     <div class="city-preview">
@@ -258,8 +269,7 @@
                 </div>
             </div>
 
-            <!-- Second Row -->
-            <div class="window-frame panoramic-window">
+            <div class="window-frame window-4">
                 <img src="window-images/window4.png" alt="Wide apartment window with city view" class="window-image">
                 <div class="window-overlay">
                     <div class="city-preview">
@@ -268,7 +278,7 @@
                 </div>
             </div>
 
-            <div class="window-frame medium-window">
+            <div class="window-frame window-5">
                 <img src="window-images/window5.png" alt="Multi-pane window with warm interior" class="window-image">
                 <div class="window-overlay">
                     <div class="city-preview">
@@ -277,7 +287,8 @@
                 </div>
             </div>
 
-            <div class="window-frame plant-window">
+            <!-- Middle Row -->
+            <div class="window-frame window-6">
                 <img src="window-images/window6.png" alt="Window with plants and green lighting" class="window-image">
                 <div class="window-overlay">
                     <div class="city-preview">
@@ -286,8 +297,7 @@
                 </div>
             </div>
 
-            <!-- Third Row -->
-            <div class="window-frame silhouette-window">
+            <div class="window-frame window-7">
                 <img src="window-images/window7.png" alt="Window with silhouette figure" class="window-image">
                 <div class="window-overlay">
                     <div class="city-preview">
@@ -296,7 +306,7 @@
                 </div>
             </div>
 
-            <div class="window-frame study-window">
+            <div class="window-frame window-8">
                 <img src="window-images/window8.png" alt="Multi-pane window with interior lighting" class="window-image">
                 <div class="window-overlay">
                     <div class="city-preview">
@@ -305,8 +315,7 @@
                 </div>
             </div>
 
-            <!-- Bottom Row -->
-            <div class="window-frame small-window">
+            <div class="window-frame window-9">
                 <img src="window-images/window9.png" alt="Small multi-pane window" class="window-image">
                 <div class="window-overlay">
                     <div class="city-preview">
@@ -315,7 +324,8 @@
                 </div>
             </div>
 
-            <div class="window-frame blue-window">
+            <!-- Bottom Row -->
+            <div class="window-frame window-10">
                 <img src="window-images/window10.png" alt="Window with blue lighting" class="window-image">
                 <div class="window-overlay">
                     <div class="city-preview">
@@ -324,7 +334,7 @@
                 </div>
             </div>
 
-            <div class="window-frame narrow-window">
+            <div class="window-frame window-11">
                 <img src="window-images/window11.png" alt="Tall narrow window" class="window-image">
                 <div class="window-overlay">
                     <div class="city-preview">
@@ -352,4 +362,5 @@
     <script src="script.js"></script>
 </body>
 </html>
+
 
