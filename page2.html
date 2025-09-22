@@ -381,14 +381,108 @@
     </div>
 
     <script>
-        // Add some interactivity
+        // Enhanced interactivity with glitch and shuffle effects
         document.addEventListener('keydown', function(e) {
             if (e.code === 'Space') {
                 e.preventDefault();
-                const grid = document.querySelector('.magazine-grid');
-                grid.style.animation = 'none';
-                grid.offsetHeight; // Trigger reflow
-                grid.style.animation = 'floatGrid 20s ease-in-out infinite';
+                shuffleGrid();
+            } else if (e.code === 'KeyG') {
+                e.preventDefault();
+                triggerGlobalGlitch();
+            }
+        });
+
+        function shuffleGrid() {
+            const grid = document.querySelector('.magazine-grid');
+            const items = Array.from(grid.children);
+            
+            // Add shuffle animation
+            grid.style.transform = 'rotate(-5deg) scale(1.2) rotateY(180deg)';
+            grid.style.transition = 'transform 0.5s ease';
+            
+            setTimeout(() => {
+                // Shuffle the items
+                for (let i = items.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    grid.insertBefore(items[j], items[i].nextSibling);
+                }
+                
+                // Reset transform
+                grid.style.transform = 'rotate(-5deg) scale(1.2)';
+                
+                // Add ripple effect
+                items.forEach((item, index) => {
+                    setTimeout(() => {
+                        item.style.transform = 'scale(1.1) rotate(5deg)';
+                        setTimeout(() => {
+                            item.style.transform = '';
+                        }, 200);
+                    }, index * 50);
+                });
+            }, 250);
+            
+            setTimeout(() => {
+                grid.style.transition = '';
+            }, 500);
+        }
+
+        function triggerGlobalGlitch() {
+            const container = document.querySelector('.deconstructed-container');
+            const items = document.querySelectorAll('.magazine-item');
+            
+            // Add glitch class
+            container.classList.add('glitch-active');
+            
+            // Glitch individual items
+            items.forEach((item, index) => {
+                setTimeout(() => {
+                    item.style.filter = 'hue-rotate(' + Math.random() * 360 + 'deg) saturate(2) contrast(1.5)';
+                    item.style.transform = 'translate(' + (Math.random() - 0.5) * 20 + 'px, ' + (Math.random() - 0.5) * 20 + 'px) rotate(' + (Math.random() - 0.5) * 10 + 'deg)';
+                    
+                    setTimeout(() => {
+                        item.style.filter = '';
+                        item.style.transform = '';
+                    }, 150);
+                }, Math.random() * 500);
+            });
+            
+            // Remove glitch class
+            setTimeout(() => {
+                container.classList.remove('glitch-active');
+            }, 1000);
+        }
+
+        // Add glitch CSS dynamically
+        const glitchStyle = document.createElement('style');
+        glitchStyle.textContent = `
+            .glitch-active {
+                animation: glitchBg 0.3s ease-in-out infinite;
+            }
+            
+            @keyframes glitchBg {
+                0% { filter: hue-rotate(0deg); }
+                25% { filter: hue-rotate(90deg) saturate(2); }
+                50% { filter: hue-rotate(180deg) contrast(1.5); }
+                75% { filter: hue-rotate(270deg) brightness(1.2); }
+                100% { filter: hue-rotate(360deg); }
+            }
+            
+            .magazine-item {
+                transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            }
+        `;
+        document.head.appendChild(glitchStyle);
+
+        // Add visual feedback for key presses
+        document.addEventListener('keydown', function(e) {
+            if (e.code === 'Space' || e.code === 'KeyG') {
+                const hint = document.querySelector('.interactive-hint');
+                hint.style.color = '#ff6b6b';
+                hint.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    hint.style.color = 'rgba(255, 255, 255, 0.6)';
+                    hint.style.transform = 'scale(1)';
+                }, 200);
             }
         });
     </script>
