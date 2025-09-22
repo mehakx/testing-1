@@ -22,7 +22,7 @@
         /* Header */
         .main-header {
             text-align: center;
-            padding: 30px 20px 20px;
+            padding: 20px 20px 15px;
             position: relative;
             z-index: 10;
         }
@@ -31,7 +31,7 @@
             font-size: 3rem;
             font-weight: bold;
             color: #ffffff;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             letter-spacing: -1px;
         }
 
@@ -70,43 +70,45 @@
             border-color: #ffffff;
         }
 
-        /* Apartment Building */
+        /* Apartment Building - Larger Layout */
         .apartment-building {
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 70vh;
-            padding: 20px;
+            min-height: 80vh;
+            padding: 15px;
         }
 
         .building-container {
             width: 100%;
-            max-width: 1400px;
-            height: 450px;
+            max-width: 1600px;
+            height: 600px;
             background: #000000;
             position: relative;
             display: grid;
             grid-template-columns: repeat(6, 1fr);
             grid-template-rows: repeat(3, 1fr);
-            gap: 20px;
-            padding: 30px;
+            gap: 25px;
+            padding: 40px;
         }
 
-        /* Window Frame Base */
+        /* Window Frame Base - Larger */
         .window-frame {
             position: relative;
-            border-radius: 4px;
+            border-radius: 6px;
             overflow: hidden;
             cursor: pointer;
             transition: all 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.2);
+            border: 3px solid rgba(255, 255, 255, 0.2);
             background: rgba(30, 30, 30, 0.9);
+            min-height: 120px;
         }
 
         .window-frame:hover {
-            transform: scale(3.00);
+            transform: scale(1.08);
             border-color: #ffffff;
             z-index: 10;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
         }
 
         /* Window Images */
@@ -147,7 +149,7 @@
             object-fit: contain;
         }
 
-        /* Specific Window Positions - Horizontal Layout */
+        /* Specific Window Positions - Larger Layout */
         .window-1 { grid-column: 1; grid-row: 1; }
         .window-2 { grid-column: 2; grid-row: 1; }
         .window-3 { grid-column: 3 / span 2; grid-row: 1; }
@@ -165,7 +167,7 @@
         /* Footer */
         .main-footer {
             text-align: center;
-            padding: 30px 20px;
+            padding: 25px 20px;
             color: #888;
         }
 
@@ -175,31 +177,16 @@
             font-family: 'Times New Roman', Times, serif;
         }
 
-        /* Corner Elements */
-        .corner-element {
-            position: fixed;
-            font-family: 'Times New Roman', Times, serif;
-            font-size: 0.7rem;
-            color: rgba(255, 255, 255, 0.5);
-            font-weight: normal;
-            z-index: 100;
-        }
-
-        .top-left { top: 15px; left: 15px; }
-        .top-right { top: 15px; right: 180px; }
-        .bottom-left { bottom: 15px; left: 15px; }
-        .bottom-right { bottom: 15px; right: 15px; }
-
         /* Responsive Design */
         @media (max-width: 768px) {
-            .main-header h1 { font-size: 2rem; }
+            .main-header h1 { font-size: 2.2rem; }
             .building-container { 
-                height: 350px;
+                height: 500px;
                 max-width: 100%;
                 grid-template-columns: repeat(4, 1fr);
                 grid-template-rows: repeat(4, 1fr);
-                gap: 15px;
-                padding: 20px;
+                gap: 20px;
+                padding: 25px;
             }
             
             /* Mobile window positions */
@@ -220,7 +207,17 @@
                 justify-content: center;
                 margin: 15px 0;
             }
-            .corner-element { display: none; }
+        }
+
+        @media (max-width: 480px) {
+            .building-container {
+                height: 400px;
+                gap: 15px;
+                padding: 20px;
+            }
+            .window-frame {
+                min-height: 80px;
+            }
         }
     </style>
 </head>
@@ -353,11 +350,7 @@
         </div>
     </footer>
 
-    <!-- Corner Elements -->
-    <div class="corner-element top-left">URBAN</div>
-
     <script src="script.js"></script>
 </body>
 </html>
-
 
