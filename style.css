@@ -1,19 +1,21 @@
-/* Apartment Building Windows Layout */
+
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box; /* reset spacing across elements */
 }
 
 body {
     font-family: 'Inter', sans-serif;
-    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%); /* dark gradient background */
     color: #ffffff;
     min-height: 100vh;
-    overflow-x: hidden;
+    overflow-x: hidden; /* prevent sideways scrolling */
 }
 
-/* Header */
+/* -------------------------
+   HEADER STYLING
+------------------------- */
 .main-header {
     text-align: center;
     padding: 60px 20px 40px;
@@ -24,6 +26,7 @@ body {
 .main-header h1 {
     font-size: 4rem;
     font-weight: 800;
+    /* gradient animated text */
     background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
     background-size: 400% 400%;
     -webkit-background-clip: text;
@@ -42,12 +45,15 @@ body {
     font-style: italic;
 }
 
+/* animated gradient for header */
 @keyframes gradientShift {
     0%, 100% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
 }
 
-/* Navigation */
+/* -------------------------
+   NAVIGATION MENU
+------------------------- */
 .page-navigation {
     position: fixed;
     top: 30px;
@@ -56,6 +62,7 @@ body {
     flex-direction: column;
     gap: 15px;
     z-index: 1000;
+    /* glassy floating nav */
     background: rgba(0, 0, 0, 0.8);
     padding: 20px;
     border-radius: 10px;
@@ -84,7 +91,9 @@ body {
     background: rgba(78, 205, 196, 0.2);
 }
 
-/* Apartment Building Layout */
+/* -------------------------
+   APARTMENT BUILDING GRID
+------------------------- */
 .apartment-building {
     padding: 40px 20px;
     display: flex;
@@ -100,6 +109,7 @@ body {
     gap: 15px;
     max-width: 1200px;
     width: 100%;
+    /* glassy background for grid container */
     background: linear-gradient(135deg, rgba(20, 20, 30, 0.8) 0%, rgba(40, 40, 60, 0.6) 100%);
     padding: 40px;
     border-radius: 20px;
@@ -108,7 +118,9 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Window Frame Base Styles */
+/* -------------------------
+   WINDOWS (EACH FRAME)
+------------------------- */
 .window-frame {
     position: relative;
     cursor: pointer;
@@ -143,63 +155,24 @@ body {
     filter: brightness(0.4) contrast(1.2) saturate(1.3);
 }
 
-/* Window Layout Positions - Matching Reference */
-.large-window {
-    grid-column: 1 / span 4;
-    grid-row: 1 / span 2;
-}
+/* -------------------------
+   GRID POSITIONS FOR WINDOWS
+------------------------- */
+.large-window { grid-column: 1 / span 4; grid-row: 1 / span 2; }
+.tall-window { grid-column: 5 / span 2; grid-row: 1 / span 3; }
+.wide-window { grid-column: 7 / span 6; grid-row: 1 / span 2; }
+.panoramic-window { grid-column: 1 / span 6; grid-row: 3 / span 2; }
+.medium-window { grid-column: 7 / span 3; grid-row: 3 / span 2; }
+.plant-window { grid-column: 10 / span 3; grid-row: 3 / span 2; }
+.silhouette-window { grid-column: 1 / span 4; grid-row: 5 / span 2; }
+.study-window { grid-column: 5 / span 4; grid-row: 5 / span 2; }
+.small-window { grid-column: 1 / span 2; grid-row: 7 / span 2; }
+.blue-window { grid-column: 3 / span 3; grid-row: 7 / span 2; }
+.narrow-window { grid-column: 6 / span 2; grid-row: 7 / span 2; }
 
-.tall-window {
-    grid-column: 5 / span 2;
-    grid-row: 1 / span 3;
-}
-
-.wide-window {
-    grid-column: 7 / span 6;
-    grid-row: 1 / span 2;
-}
-
-.panoramic-window {
-    grid-column: 1 / span 6;
-    grid-row: 3 / span 2;
-}
-
-.medium-window {
-    grid-column: 7 / span 3;
-    grid-row: 3 / span 2;
-}
-
-.plant-window {
-    grid-column: 10 / span 3;
-    grid-row: 3 / span 2;
-}
-
-.silhouette-window {
-    grid-column: 1 / span 4;
-    grid-row: 5 / span 2;
-}
-
-.study-window {
-    grid-column: 5 / span 4;
-    grid-row: 5 / span 2;
-}
-
-.small-window {
-    grid-column: 1 / span 2;
-    grid-row: 7 / span 2;
-}
-
-.blue-window {
-    grid-column: 3 / span 3;
-    grid-row: 7 / span 2;
-}
-
-.narrow-window {
-    grid-column: 6 / span 2;
-    grid-row: 7 / span 2;
-}
-
-/* Window Overlay */
+/* -------------------------
+   WINDOW OVERLAY
+------------------------- */
 .window-overlay {
     position: absolute;
     top: 0;
@@ -226,6 +199,7 @@ body {
     opacity: 1;
 }
 
+/* circular preview inside overlay */
 .city-preview {
     width: 80px;
     height: 80px;
@@ -248,6 +222,7 @@ body {
     object-fit: cover;
 }
 
+/* text info inside overlay */
 .city-info {
     text-align: center;
     transform: translateY(20px);
@@ -274,7 +249,9 @@ body {
     text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
 }
 
-/* Footer */
+/* -------------------------
+   FOOTER
+------------------------- */
 .main-footer {
     text-align: center;
     padding: 60px 20px;
@@ -296,7 +273,9 @@ body {
     color: #b8b8b8;
 }
 
-/* Corner Elements */
+/* -------------------------
+   CORNER LABELS
+------------------------- */
 .corner-element {
     position: fixed;
     font-family: 'JetBrains Mono', monospace;
@@ -307,27 +286,16 @@ body {
     z-index: 100;
 }
 
-.top-left {
-    top: 30px;
-    left: 30px;
-}
+.top-left { top: 30px; left: 30px; }
+.top-right { top: 30px; right: 200px; }
+.bottom-left { bottom: 30px; left: 30px; }
+.bottom-right { bottom: 30px; right: 30px; }
 
-.top-right {
-    top: 30px;
-    right: 200px;
-}
+/* -------------------------
+   RESPONSIVE BREAKPOINTS
+------------------------- */
 
-.bottom-left {
-    bottom: 30px;
-    left: 30px;
-}
-
-.bottom-right {
-    bottom: 30px;
-    right: 30px;
-}
-
-/* Responsive Design */
+/* Medium screens */
 @media (max-width: 1200px) {
     .building-container {
         grid-template-columns: repeat(8, 1fr);
@@ -335,7 +303,7 @@ body {
         gap: 12px;
         padding: 30px;
     }
-    
+    /* adjust window layout */
     .large-window { grid-column: 1 / span 3; grid-row: 1 / span 2; }
     .tall-window { grid-column: 4 / span 2; grid-row: 1 / span 3; }
     .wide-window { grid-column: 6 / span 3; grid-row: 1 / span 2; }
@@ -349,18 +317,16 @@ body {
     .narrow-window { grid-column: 5 / span 2; grid-row: 7 / span 2; }
 }
 
+/* Tablets */
 @media (max-width: 768px) {
-    .main-header h1 {
-        font-size: 2.5rem;
-    }
-    
+    .main-header h1 { font-size: 2.5rem; }
     .building-container {
         grid-template-columns: repeat(4, 1fr);
         grid-template-rows: repeat(20, 60px);
         gap: 8px;
         padding: 20px;
     }
-    
+    /* windows reflow */
     .large-window { grid-column: 1 / span 2; grid-row: 1 / span 3; }
     .tall-window { grid-column: 3 / span 2; grid-row: 1 / span 4; }
     .wide-window { grid-column: 1 / span 4; grid-row: 4 / span 2; }
@@ -372,7 +338,8 @@ body {
     .small-window { grid-column: 1 / span 1; grid-row: 14 / span 2; }
     .blue-window { grid-column: 2 / span 2; grid-row: 14 / span 2; }
     .narrow-window { grid-column: 4 / span 1; grid-row: 14 / span 3; }
-    
+
+    /* nav changes from floating → inline */
     .page-navigation {
         position: relative;
         top: auto;
@@ -382,37 +349,22 @@ body {
         margin: 20px auto;
         width: fit-content;
     }
-    
-    .corner-element {
-        display: none;
-    }
-    
-    .city-preview {
-        width: 60px;
-        height: 60px;
-    }
-    
-    .city-info h3 {
-        font-size: 1.1rem;
-    }
-    
-    .city-info p {
-        font-size: 0.8rem;
-    }
+    .corner-element { display: none; } /* hide corner labels on small screens */
+    .city-preview { width: 60px; height: 60px; }
+    .city-info h3 { font-size: 1.1rem; }
+    .city-info p { font-size: 0.8rem; }
 }
 
+/* Phones */
 @media (max-width: 480px) {
-    .main-header h1 {
-        font-size: 2rem;
-    }
-    
+    .main-header h1 { font-size: 2rem; }
     .building-container {
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(30, 50px);
         gap: 6px;
         padding: 15px;
     }
-    
+    /* even more stacked layout */
     .large-window { grid-column: 1 / span 2; grid-row: 1 / span 4; }
     .tall-window { grid-column: 1 / span 1; grid-row: 5 / span 5; }
     .wide-window { grid-column: 2 / span 1; grid-row: 5 / span 3; }
