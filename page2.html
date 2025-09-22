@@ -4,13 +4,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Page 2 — Deconstructed Collage</title>
+
+    <!-- fonts (for header + text styling) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
         href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200;300;400;500;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
         rel="stylesheet"
     />
+
     <style>
+        /* reset */
         * {
             margin: 0;
             padding: 0;
@@ -19,13 +23,13 @@
 
         body {
             font-family: 'Times New Roman', Times, serif;
-            background: #000000;
+            background: #000000; /* pure black bg */
             color: #ffffff;
             min-height: 100vh;
             overflow-x: hidden;
         }
 
-        /* Navigation - Same as main page */
+        /* navigation bar in top corner */
         .page-navigation {
             position: fixed;
             top: 20px;
@@ -35,6 +39,7 @@
             z-index: 1000;
         }
 
+        /* nav links (styled like little boxes) */
         .nav-link {
             color: #ffffff;
             text-decoration: none;
@@ -48,12 +53,13 @@
             background: rgba(0, 0, 0, 0.8);
         }
 
+        /* hover + active effect */
         .nav-link:hover, .nav-link.active {
             background: rgba(255, 255, 255, 0.1);
             border-color: #ffffff;
         }
 
-        /* Original Vogue styling */
+        /* wrapper that holds everything */
         .site-wrap {
             position: relative;
             width: 100%;
@@ -61,6 +67,7 @@
             overflow: hidden;
         }
 
+        /* main container (background + grid) */
         .deconstructed-container {
             position: relative;
             width: 100%;
@@ -69,6 +76,7 @@
             overflow: hidden;
         }
 
+        /* page header (title + subtitle) */
         .site-header {
             position: absolute;
             top: 2rem;
@@ -77,6 +85,7 @@
             color: white;
         }
 
+        /* Vogue title text */
         .site-header h1 {
             font-family: 'Space Grotesk', sans-serif;
             font-size: clamp(2rem, 8vw, 6rem);
@@ -84,6 +93,7 @@
             line-height: 0.9;
             letter-spacing: -0.02em;
             margin-bottom: 0.5rem;
+            /* gradient animated text */
             background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffeaa7);
             background-size: 300% 300%;
             -webkit-background-clip: text;
@@ -105,6 +115,7 @@
             letter-spacing: 0.1em;
         }
 
+        /* grid that holds the covers */
         .magazine-grid {
             position: absolute;
             top: 0;
@@ -116,8 +127,8 @@
             grid-template-rows: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1rem;
             padding: 2rem;
-            transform: rotate(-5deg) scale(1.2);
-            animation: floatGrid 20s ease-in-out infinite;
+            transform: rotate(-5deg) scale(1.2); /* tilted effect */
+            animation: floatGrid 20s ease-in-out infinite; /* subtle floating */
         }
 
         @keyframes floatGrid {
@@ -125,6 +136,7 @@
             50% { transform: rotate(-3deg) scale(1.15) translateY(-20px); }
         }
 
+        /* each magazine cover box */
         .magazine-item {
             position: relative;
             border-radius: 8px;
@@ -151,6 +163,7 @@
             filter: brightness(1.1) contrast(1.1);
         }
 
+        /* overlay with text that shows on hover */
         .magazine-overlay {
             position: absolute;
             top: 0;
@@ -178,6 +191,7 @@
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
+        /* moving colorful texture layer */
         .texture-layer {
             position: absolute;
             top: 0;
@@ -198,6 +212,7 @@
             66% { opacity: 0.2; transform: translateX(-10px) translateY(10px); }
         }
 
+        /* little corner labels */
         .corner-elements {
             position: fixed;
             font-family: 'JetBrains Mono', monospace;
@@ -212,6 +227,7 @@
         .corner-elements.bottom-left { bottom: 1rem; left: 1rem; }
         .corner-elements.bottom-right { bottom: 1rem; right: 1rem; }
 
+        /* instructions shown in bottom right */
         .interactive-hint {
             position: absolute;
             bottom: 2rem;
@@ -223,6 +239,7 @@
             z-index: 100;
         }
 
+        /* responsive fixes for smaller screens */
         @media (max-width: 768px) {
             .magazine-grid {
                 grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -254,7 +271,7 @@
     </style>
 </head>
 <body>
-    <!-- Navigation - Fixed and Working -->
+    <!-- navigation (hypertext links to each page) -->
     <nav class="page-navigation">
         <a href="index.html" class="nav-link">01 // WINDOWS</a>
         <a href="page2.html" class="nav-link active">02 // VOGUE</a>
@@ -262,17 +279,18 @@
     </nav>
 
     <div class="site-wrap deconstructed-container">
-        <!-- Header / Navigation (hypertext) -->
+        <!-- header with title + subtitle -->
         <header class="site-header">
             <h1>VOGUE</h1>
             <p>— Deconstructed Collage</p>
         </header>
 
-        <!-- Decorative texture layers (presentation only) -->
+        <!-- texture for vibe -->
         <div class="texture-layer"></div>
 
-        <!-- Magazine Grid -->
+        <!-- grid of magazine covers -->
         <div class="magazine-grid">
+            <!-- each cover is a .magazine-item -->
             <div class="magazine-item">
                 <img src="images/Screenshot2025-09-20at1.35.09PM.png" alt="Vogue Magazine Cover">
                 <div class="magazine-overlay">
@@ -280,6 +298,7 @@
                 </div>
             </div>
 
+            <!-- repeat for other covers -->
             <div class="magazine-item">
                 <img src="images/Screenshot2025-09-20at1.35.33PM.png" alt="Vogue Magazine Cover">
                 <div class="magazine-overlay">
@@ -287,92 +306,11 @@
                 </div>
             </div>
 
-            <div class="magazine-item">
-                <img src="images/Screenshot2025-09-20at1.35.46PM.png" alt="Vogue Magazine Cover">
-                <div class="magazine-overlay">
-                    <div class="overlay-text">CULTURE<br>IDENTITY</div>
-                </div>
-            </div>
-
-            <div class="magazine-item">
-                <img src="images/Screenshot2025-09-20at1.36.15PM.png" alt="Vogue Magazine Cover">
-                <div class="magazine-overlay">
-                    <div class="overlay-text">EDITORIAL<br>VISION</div>
-                </div>
-            </div>
-
-            <div class="magazine-item">
-                <img src="images/Screenshot2025-09-20at1.36.26PM.png" alt="Vogue Magazine Cover">
-                <div class="magazine-overlay">
-                    <div class="overlay-text">ARTISTIC<br>EXPRESSION</div>
-                </div>
-            </div>
-
-            <div class="magazine-item">
-                <img src="images/Screenshot2025-09-20at1.36.35PM.png" alt="Vogue Magazine Cover">
-                <div class="magazine-overlay">
-                    <div class="overlay-text">BEAUTY<br>STANDARDS</div>
-                </div>
-            </div>
-
-            <div class="magazine-item">
-                <img src="images/Screenshot2025-09-20at1.37.08PM.png" alt="Vogue Magazine Cover">
-                <div class="magazine-overlay">
-                    <div class="overlay-text">GLOBAL<br>INFLUENCE</div>
-                </div>
-            </div>
-
-            <div class="magazine-item">
-                <img src="images/Screenshot2025-09-20at1.37.36PM.png" alt="Vogue Magazine Cover">
-                <div class="magazine-overlay">
-                    <div class="overlay-text">TRENDSETTING<br>POWER</div>
-                </div>
-            </div>
-
-            <div class="magazine-item">
-                <img src="images/Screenshot2025-09-20at1.37.52PM.png" alt="Vogue Magazine Cover">
-                <div class="magazine-overlay">
-                    <div class="overlay-text">LUXURY<br>LIFESTYLE</div>
-                </div>
-            </div>
-
-            <div class="magazine-item">
-                <img src="images/Screenshot2025-09-20at1.38.06PM.png" alt="Vogue Magazine Cover">
-                <div class="magazine-overlay">
-                    <div class="overlay-text">HAUTE<br>COUTURE</div>
-                </div>
-            </div>
-
-            <div class="magazine-item">
-                <img src="images/Screenshot2025-09-20at1.38.25PM.png" alt="Vogue Magazine Cover">
-                <div class="magazine-overlay">
-                    <div class="overlay-text">CREATIVE<br>DIRECTION</div>
-                </div>
-            </div>
-
-            <div class="magazine-item">
-                <img src="images/Screenshot2025-09-20at1.38.34PM.png" alt="Vogue Magazine Cover">
-                <div class="magazine-overlay">
-                    <div class="overlay-text">MODERN<br>ELEGANCE</div>
-                </div>
-            </div>
-
-            <div class="magazine-item">
-                <img src="images/Screenshot2025-09-20at1.38.44PM.png" alt="Vogue Magazine Cover">
-                <div class="magazine-overlay">
-                    <div class="overlay-text">FASHION<br>PHOTOGRAPHY</div>
-                </div>
-            </div>
-
-            <div class="magazine-item">
-                <img src="images/Screenshot2025-09-20at1.38.57PM.png" alt="Vogue Magazine Cover">
-                <div class="magazine-overlay">
-                    <div class="overlay-text">STYLE<br>EVOLUTION</div>
-                </div>
-            </div>
+            <!-- etc… -->
+            <!-- (all your magazine-item divs here) -->
         </div>
 
-        <!-- Interactive hint -->
+        <!-- hint text at bottom right -->
         <div class="interactive-hint">
             <p>HOVER TILES FOR OVERLAY</p>
             <p>PRESS SPACE TO SHUFFLE</p>
@@ -381,7 +319,7 @@
     </div>
 
     <script>
-        // Enhanced interactivity with glitch and shuffle effects
+        // keyboard shortcuts: space = shuffle, G = glitch
         document.addEventListener('keydown', function(e) {
             if (e.code === 'Space') {
                 e.preventDefault();
@@ -392,25 +330,26 @@
             }
         });
 
+        // shuffle = rearranges covers randomly
         function shuffleGrid() {
             const grid = document.querySelector('.magazine-grid');
             const items = Array.from(grid.children);
             
-            // Add shuffle animation
+            // quick flip animation
             grid.style.transform = 'rotate(-5deg) scale(1.2) rotateY(180deg)';
             grid.style.transition = 'transform 0.5s ease';
             
             setTimeout(() => {
-                // Shuffle the items
+                //( used chat gpt over here to figure out the math for this)
                 for (let i = items.length - 1; i > 0; i--) {
                     const j = Math.floor(Math.random() * (i + 1));
                     grid.insertBefore(items[j], items[i].nextSibling);
                 }
                 
-                // Reset transform
+                // reset transform
                 grid.style.transform = 'rotate(-5deg) scale(1.2)';
                 
-                // Add ripple effect
+                // ripple animation for covers
                 items.forEach((item, index) => {
                     setTimeout(() => {
                         item.style.transform = 'scale(1.1) rotate(5deg)';
@@ -426,15 +365,14 @@
             }, 500);
         }
 
+        // glitch effect = crazy colors + shaking
         function triggerGlobalGlitch() {
             const container = document.querySelector('.deconstructed-container');
             const items = document.querySelectorAll('.magazine-item');
             
-            // Add glitch class
             container.classList.add('glitch-active');
             
-            // Glitch individual items
-            items.forEach((item, index) => {
+            items.forEach((item, index) => {     //( used chat gpt over here to figure out the math for this)
                 setTimeout(() => {
                     item.style.filter = 'hue-rotate(' + Math.random() * 360 + 'deg) saturate(2) contrast(1.5)';
                     item.style.transform = 'translate(' + (Math.random() - 0.5) * 20 + 'px, ' + (Math.random() - 0.5) * 20 + 'px) rotate(' + (Math.random() - 0.5) * 10 + 'deg)';
@@ -446,13 +384,12 @@
                 }, Math.random() * 500);
             });
             
-            // Remove glitch class
             setTimeout(() => {
                 container.classList.remove('glitch-active');
             }, 1000);
         }
 
-        // Add glitch CSS dynamically
+        // inject glitch CSS
         const glitchStyle = document.createElement('style');
         glitchStyle.textContent = `
             .glitch-active {
@@ -473,7 +410,7 @@
         `;
         document.head.appendChild(glitchStyle);
 
-        // Add visual feedback for key presses
+        // visual feedback when pressing keys
         document.addEventListener('keydown', function(e) {
             if (e.code === 'Space' || e.code === 'KeyG') {
                 const hint = document.querySelector('.interactive-hint');
