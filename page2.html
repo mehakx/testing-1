@@ -1,341 +1,397 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1"
-    />
-    <title>Page 2 —Deconstructed Collage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Page 2 — Deconstructed Collage</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200;300;400;500;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Bebas+Neue&family=Anton&family=Oswald:wght@200;300;400;500;600;700&display=swap"
-      rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200;300;400;500;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
     />
-    <link rel="stylesheet" href="page2-style.css" />
-  </head>
-  <body>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background: #000000;
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Navigation - Same as main page */
+        .page-navigation {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .nav-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 0.8rem;
+            font-weight: normal;
+            padding: 6px 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #ffffff;
+        }
+
+        /* Original Vogue styling */
+        .site-wrap {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .deconstructed-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            overflow: hidden;
+        }
+
+        .site-header {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            z-index: 100;
+            color: white;
+        }
+
+        .site-header h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2rem, 8vw, 6rem);
+            font-weight: 800;
+            line-height: 0.9;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffeaa7);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .site-header p {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(0.8rem, 2vw, 1.2rem);
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.8);
+            letter-spacing: 0.1em;
+        }
+
+        .magazine-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-rows: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            padding: 2rem;
+            transform: rotate(-5deg) scale(1.2);
+            animation: floatGrid 20s ease-in-out infinite;
+        }
+
+        @keyframes floatGrid {
+            0%, 100% { transform: rotate(-5deg) scale(1.2) translateY(0px); }
+            50% { transform: rotate(-3deg) scale(1.15) translateY(-20px); }
+        }
+
+        .magazine-item {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .magazine-item:hover {
+            transform: scale(1.05) rotate(2deg);
+            z-index: 10;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .magazine-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.4s ease;
+        }
+
+        .magazine-item:hover img {
+            filter: brightness(1.1) contrast(1.1);
+        }
+
+        .magazine-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255, 107, 107, 0.8), rgba(78, 205, 196, 0.8));
+            opacity: 0;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .magazine-item:hover .magazine-overlay {
+            opacity: 1;
+        }
+
+        .overlay-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: white;
+            text-align: center;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .texture-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 177, 153, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 119, 198, 0.2) 0%, transparent 50%);
+            pointer-events: none;
+            animation: textureShift 15s ease-in-out infinite;
+        }
+
+        @keyframes textureShift {
+            0%, 100% { opacity: 0.3; transform: translateX(0px) translateY(0px); }
+            33% { opacity: 0.5; transform: translateX(10px) translateY(-10px); }
+            66% { opacity: 0.2; transform: translateX(-10px) translateY(10px); }
+        }
+
+        .corner-elements {
+            position: fixed;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 300;
+            z-index: 50;
+        }
+
+        .corner-elements.top-left { top: 1rem; left: 1rem; }
+        .corner-elements.top-right { top: 1rem; right: 1rem; }
+        .corner-elements.bottom-left { bottom: 1rem; left: 1rem; }
+        .corner-elements.bottom-right { bottom: 1rem; right: 1rem; }
+
+        .interactive-hint {
+            position: absolute;
+            bottom: 2rem;
+            right: 2rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            text-align: right;
+            z-index: 100;
+        }
+
+        @media (max-width: 768px) {
+            .magazine-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                grid-template-rows: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 0.5rem;
+                padding: 1rem;
+                transform: rotate(-2deg) scale(1.1);
+            }
+
+            .site-header {
+                top: 1rem;
+                left: 1rem;
+            }
+
+            .interactive-hint {
+                bottom: 1rem;
+                right: 1rem;
+                font-size: 0.8rem;
+            }
+
+            .page-navigation {
+                position: static;
+                justify-content: center;
+                margin: 15px 0;
+                top: auto;
+                right: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation - Fixed and Working -->
+    <nav class="page-navigation">
+        <a href="index.html" class="nav-link">01 // WINDOWS</a>
+        <a href="page2.html" class="nav-link active">02 // VOGUE</a>
+        <a href="page3.html" class="nav-link">03 // SONIC</a>
+    </nav>
+
     <div class="site-wrap deconstructed-container">
-      <!-- Header / Navigation (hypertext) -->
-      <header class="site-header">
-        <nav class="site-nav" aria-label="Primary">
-          <a href="index.html">Page 1 — Newsstand</a>
-          <a href="page2.html" aria-current="page">Page 2 — Deconstructed</a>
-          <a href="memory.html">Page 3 — Memory</a>
-        </nav>
-      </header>
+        <!-- Header / Navigation (hypertext) -->
+        <header class="site-header">
+            <h1>VOGUE</h1>
+            <p>— Deconstructed Collage</p>
+        </header>
 
-      <!-- Decorative texture layers (presentation only) -->
-      <div class="texture-layer layer-1" aria-hidden="true"></div>
-      <div class="texture-layer layer-2" aria-hidden="true"></div>
-      <div class="texture-layer layer-3" aria-hidden="true"></div>
+        <!-- Decorative texture layers (presentation only) -->
+        <div class="texture-layer"></div>
 
-      <main id="main" class="page-content" tabindex="-1">
-        <!-- Intro text (counts toward 3+ text blocks) -->
-        <section class="intro text-block">
-          <h1 class="sr-only">VOGUE — Deconstructed Collage</h1>
-        
-        </section>
-
-        <!-- Main collage grid -->
-        <section
-          class="static-collage-grid"
-          aria-label="Deconstructed collage grid"
-        >
-          <!-- Main VOGUE typography (decorative wordmark) -->
-          <div class="typo-element typo-main" aria-hidden="true">
-            <span class="letter l1" aria-hidden="true">V</span>
-            <span class="letter l2" aria-hidden="true">O</span>
-            <span class="letter l3" aria-hidden="true">G</span>
-            <span class="letter l4" aria-hidden="true">U</span>
-            <span class="letter l5" aria-hidden="true">E</span>
-          </div>
-
-          <!-- FASHION typography (decorative) -->
-          <div class="typo-element typo-fashion" aria-hidden="true">
-            <div class="word-fragment wf1">FASH</div>
-            <div class="word-fragment wf2">ION</div>
-          </div>
-
-          <!-- CULTURE / IDENTITY stack (decorative) -->
-          <div class="typo-element typo-culture" aria-hidden="true">
-            <div class="stacked-text">
-              <div class="stack-line">CULT</div>
-              <div class="stack-line">URE</div>
-              <div class="stack-line">IDEN</div>
-              <div class="stack-line">TITY</div>
+        <!-- Magazine Grid -->
+        <div class="magazine-grid">
+            <div class="magazine-item">
+                <img src="images/Screenshot2025-09-20at1.35.09PM.png" alt="Vogue Magazine Cover">
+                <div class="magazine-overlay">
+                    <div class="overlay-text">FASHION<br>FORWARD</div>
+                </div>
             </div>
-          </div>
 
-          <!-- Magazine covers (≥10 images) — now semantic figures with links (hypertext) -->
-          <figure class="magazine-cover cover-1">
-            <a
-              href="memory.html#butterfly"
-              aria-label="Open Butterfly Effect details"
-            >
-              <img
-                src="images/Screenshot2025-09-20at1.38.44PM.png"
-                alt="Vogue cover: model framed by abstract butterfly wings over the ocean. Headline: Butterfly Effect."
-              />
-            </a>
-            <figcaption>
-              <strong>Butterfly Effect</strong> — motion as identity
-            </figcaption>
-          </figure>
+            <div class="magazine-item">
+                <img src="images/Screenshot2025-09-20at1.35.33PM.png" alt="Vogue Magazine Cover">
+                <div class="magazine-overlay">
+                    <div class="overlay-text">STYLE<br>ICON</div>
+                </div>
+            </div>
 
-          <figure class="magazine-cover cover-2">
-            <a
-              href="memory.html#glamour"
-              aria-label="Open Glamour Freedom details"
-            >
-              <img
-                src="images/Screenshot2025-09-20at1.35.33PM.png"
-                alt="Vogue cover: high-gloss beauty portrait with dramatic light. Subhead: Freedom."
-              />
-            </a>
-            <figcaption>
-              <strong>Glamour</strong> — freedom in the frame
-            </figcaption>
-          </figure>
+            <div class="magazine-item">
+                <img src="images/Screenshot2025-09-20at1.35.46PM.png" alt="Vogue Magazine Cover">
+                <div class="magazine-overlay">
+                    <div class="overlay-text">CULTURE<br>IDENTITY</div>
+                </div>
+            </div>
 
-          <figure class="magazine-cover cover-3">
-            <a
-              href="memory.html#evolution"
-              aria-label="Open Evolution Theory details"
-            >
-              <img
-                src="images/Screenshot2025-09-20at1.36.35PM.png"
-                alt="Vogue cover exploring evolution with layered typography and shifting silhouettes. Headline: Evolution Theory."
-              />
-            </a>
-            <figcaption>
-              <strong>Evolution</strong> — theory in motion
-            </figcaption>
-          </figure>
+            <div class="magazine-item">
+                <img src="images/Screenshot2025-09-20at1.36.15PM.png" alt="Vogue Magazine Cover">
+                <div class="magazine-overlay">
+                    <div class="overlay-text">EDITORIAL<br>VISION</div>
+                </div>
+            </div>
 
-          <figure class="magazine-cover cover-4">
-            <a href="memory.html#tyla" aria-label="Open Tyla Headliners details">
-              <img
-                src="images/Screenshot2025-09-20at1.37.52PM.png"
-                alt="Vogue cover featuring Tyla styled for a headlining performance. Subhead: Headliners."
-              />
-            </a>
-            <figcaption>
-              <strong>Tyla</strong> — headliners, center stage
-            </figcaption>
-          </figure>
+            <div class="magazine-item">
+                <img src="images/Screenshot2025-09-20at1.36.26PM.png" alt="Vogue Magazine Cover">
+                <div class="magazine-overlay">
+                    <div class="overlay-text">ARTISTIC<br>EXPRESSION</div>
+                </div>
+            </div>
 
-          <figure class="magazine-cover cover-5">
-            <a
-              href="memory.html#movement"
-              aria-label="Open Movement Singapore details"
-            >
-              <img
-                src="images/Screenshot2025-09-20at1.38.25PM.png"
-                alt="Vogue Singapore cover emphasizing movement with dynamic pose and motion blur. Headline: Movement."
-              />
-            </a>
-            <figcaption>
-              <strong>Movement</strong> — Singapore edition
-            </figcaption>
-          </figure>
+            <div class="magazine-item">
+                <img src="images/Screenshot2025-09-20at1.36.35PM.png" alt="Vogue Magazine Cover">
+                <div class="magazine-overlay">
+                    <div class="overlay-text">BEAUTY<br>STANDARDS</div>
+                </div>
+            </div>
 
-          <figure class="magazine-cover cover-6">
-            <a
-              href="memory.html#beauty"
-              aria-label="Open Beauty Thailand details"
-            >
-              <img
-                src="images/Screenshot2025-09-20at1.36.15PM.png"
-                alt="Vogue Thailand beauty cover: luminous skin close-up, glossy styling. Headline: Beauty."
-              />
-            </a>
-            <figcaption>
-              <strong>Beauty</strong> — Thailand’s lens
-            </figcaption>
-          </figure>
+            <div class="magazine-item">
+                <img src="images/Screenshot2025-09-20at1.37.08PM.png" alt="Vogue Magazine Cover">
+                <div class="magazine-overlay">
+                    <div class="overlay-text">GLOBAL<br>INFLUENCE</div>
+                </div>
+            </div>
 
-          <figure class="magazine-cover cover-7">
-            <a
-              href="memory.html#addicted"
-              aria-label="Open Addicted Paris details"
-            >
-              <img
-                src="images/Screenshot2025-09-20at1.35.46PM.png"
-                alt="Vogue Paris cover with bold 'Addicted' headline and stark styling."
-              />
-            </a>
-            <figcaption>
-              <strong>Addicted</strong> — Paris intensity
-            </figcaption>
-          </figure>
+            <div class="magazine-item">
+                <img src="images/Screenshot2025-09-20at1.37.36PM.png" alt="Vogue Magazine Cover">
+                <div class="magazine-overlay">
+                    <div class="overlay-text">TRENDSETTING<br>POWER</div>
+                </div>
+            </div>
 
-          <figure class="magazine-cover cover-8">
-            <a
-              href="memory.html#memories"
-              aria-label="Open Memories Portugal details"
-            >
-              <img
-                src="images/Screenshot2025-09-20at1.37.08PM.png"
-                alt="Vogue Portugal cover themed around memories with soft film-like color."
-              />
-            </a>
-            <figcaption>
-              <strong>Memories</strong> — Portugal’s archive
-            </figcaption>
-          </figure>
+            <div class="magazine-item">
+                <img src="images/Screenshot2025-09-20at1.37.52PM.png" alt="Vogue Magazine Cover">
+                <div class="magazine-overlay">
+                    <div class="overlay-text">LUXURY<br>LIFESTYLE</div>
+                </div>
+            </div>
 
-          <figure class="magazine-cover cover-9">
-            <a
-              href="memory.html#futuro"
-              aria-label="Open El Futuro España details"
-            >
-              <img
-                src="images/Screenshot2025-09-20at1.38.06PM.png"
-                alt="Vogue España cover with the headline 'El Futuro' in bold editorial type."
-              />
-            </a>
-            <figcaption>
-              <strong>El Futuro</strong> — España, forward
-            </figcaption>
-          </figure>
+            <div class="magazine-item">
+                <img src="images/Screenshot2025-09-20at1.38.06PM.png" alt="Vogue Magazine Cover">
+                <div class="magazine-overlay">
+                    <div class="overlay-text">HAUTE<br>COUTURE</div>
+                </div>
+            </div>
 
-          <figure class="magazine-cover cover-10">
-            <a
-              href="memory.html#baguio"
-              aria-label="Open Baguio Beyond details"
-            >
-              <img
-                src="images/Screenshot2025-09-20at1.36.26PM.png"
-                alt="Vogue cover highlighting Baguio with landscape tones and layered type. Subhead: Beyond."
-              />
-            </a>
-            <figcaption>
-              <strong>Baguio</strong> — beyond the frame
-            </figcaption>
-          </figure>
+            <div class="magazine-item">
+                <img src="images/Screenshot2025-09-20at1.38.25PM.png" alt="Vogue Magazine Cover">
+                <div class="magazine-overlay">
+                    <div class="overlay-text">CREATIVE<br>DIRECTION</div>
+                </div>
+            </div>
 
-          <figure class="magazine-cover cover-11">
-            <a
-              href="memory.html#billie"
-              aria-label="Open The Greatest — Billie Eilish details"
-            >
-              <img
-                src="images/Screenshot2025-09-20at1.38.57PM.png"
-                alt="Vogue cover featuring Billie Eilish with the headline 'The Greatest'."
-              />
-            </a>
-            <figcaption>
-              <strong>The Greatest</strong> — Billie Eilish
-            </figcaption>
-          </figure>
+            <div class="magazine-item">
+                <img src="images/Screenshot2025-09-20at1.38.34PM.png" alt="Vogue Magazine Cover">
+                <div class="magazine-overlay">
+                    <div class="overlay-text">MODERN<br>ELEGANCE</div>
+                </div>
+            </div>
 
-          <figure class="magazine-cover cover-12">
-            <a
-              href="memory.html#beyonce"
-              aria-label="Open Beyoncé Red Hot details"
-            >
-              <img
-                src="images/Screenshot2025-09-20at1.37.36PM.png"
-                alt="Vogue cover of Beyoncé in a saturated red palette. Subhead: Red Hot."
-              />
-            </a>
-            <figcaption>
-              <strong>Beyoncé</strong> — red hot
-            </figcaption>
-          </figure>
+            <div class="magazine-item">
+                <img src="images/Screenshot2025-09-20at1.38.44PM.png" alt="Vogue Magazine Cover">
+                <div class="magazine-overlay">
+                    <div class="overlay-text">FASHION<br>PHOTOGRAPHY</div>
+                </div>
+            </div>
 
-          <figure class="magazine-cover cover-13">
-            <a
-              href="memory.html#zendaya"
-              aria-label="Open Zendaya Fly High details"
-            >
-              <img
-                src="images/Screenshot2025-09-20at1.35.09PM.png"
-                alt="Vogue cover of Zendaya with an elevated 'Fly High' concept."
-              />
-            </a>
-            <figcaption>
-              <strong>Zendaya</strong> — fly high
-            </figcaption>
-          </figure>
-
-          <figure class="magazine-cover cover-14">
-            <a
-              href="memory.html#philippines"
-              aria-label="Open Philippines Issue details"
-            >
-              <img
-                src="images/Screenshot2025-09-20at1.36.26PM.png"
-                alt="Vogue Philippines issue with regional editorial styling and serif masthead."
-              />
-            </a>
-            <figcaption>
-              <strong>Philippines</strong> — issue focus
-            </figcaption>
-          </figure>
-        </section>
-
-        <!-- Scattered text / glitch labels (now semantic) -->
-        <aside class="scattered-chaos" aria-label="Ambient collage labels">
-          <ul class="chaos-words" aria-label="Theme words">
-            <li class="chaos-text ct1">AUTHENTICITY</li>
-            <li class="chaos-text ct2">NOISE</li>
-            <li class="chaos-text ct3">SIGNAL</li>
-            <li class="chaos-text ct4">MEMORY</li>
-            <li class="chaos-text ct5">TONE</li>
-            <li class="chaos-text ct6">COLOR</li>
-            <li class="chaos-text ct7">TRUST</li>
-            <li class="chaos-text ct8">VOICE</li>
-            <li class="chaos-text ct9">RANGE</li>
-            <li class="chaos-text ct10">FUTURE</li>
-          </ul>
-
-          <ul class="glitch-flags" aria-label="Glitch system flags">
-            <li class="glitch-element ge1">ERROR_404</li>
-            <li class="glitch-element ge2">SYSTEM.CRASH</li>
-            <li class="glitch-element ge3">LOADING…</li>
-            <li class="glitch-element ge4">CORRUPTED</li>
-            <li class="glitch-element ge5">NULL_VOID</li>
-          </ul>
-
-          <!-- Decorative shapes only -->
-          <div class="geo-shape gs1" aria-hidden="true"></div>
-          <div class="geo-shape gs2" aria-hidden="true"></div>
-          <div class="geo-shape gs3" aria-hidden="true"></div>
-          <div class="geo-shape gs4" aria-hidden="true"></div>
-          <div class="geo-shape gs5" aria-hidden="true"></div>
-        </aside>
-
-        <!-- Subtle distortion effects (decorative) -->
-        <div class="distortion-effects" aria-hidden="true">
-          <div class="static-block sb1"></div>
-          <div class="static-block sb2"></div>
-          <div class="static-block sb3"></div>
+            <div class="magazine-item">
+                <img src="images/Screenshot2025-09-20at1.38.57PM.png" alt="Vogue Magazine Cover">
+                <div class="magazine-overlay">
+                    <div class="overlay-text">STYLE<br>EVOLUTION</div>
+                </div>
+            </div>
         </div>
 
-        <!-- Corner labels (styled text; visible content) -->
-        <section class="corner-labels" aria-label="Page markers">
-          <span class="corner-element bottom-right">PAGE 02</span>
-        </section>
-
-        <!-- User instructions (text block) -->
-        <section class="instructions" aria-label="Interaction instructions">
-          <p class="instruction">Hover tiles for overlays.</p>
-          <p class="instruction">
-            Press <kbd>Space</kbd> to shuffle labels.
-          </p>
-          <p class="instruction">Press <kbd>G</kbd> for global glitch.</p>
-        </section>
-      </main>
-
-      <!-- Footer with credits (required for found/AI media) -->
-      <footer class="site-footer">
-    
-        <p>©Mehak. </p>
-      </footer>
+        <!-- Interactive hint -->
+        <div class="interactive-hint">
+            <p>HOVER TILES FOR OVERLAY</p>
+            <p>PRESS SPACE TO SHUFFLE</p>
+            <p>PRESS G FOR GLOBAL GLITCH</p>
+        </div>
     </div>
 
-    <script src="page2-script.js" defer></script>
-  </body>
+    <script>
+        // Add some interactivity
+        document.addEventListener('keydown', function(e) {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                const grid = document.querySelector('.magazine-grid');
+                grid.style.animation = 'none';
+                grid.offsetHeight; // Trigger reflow
+                grid.style.animation = 'floatGrid 20s ease-in-out infinite';
+            }
+        });
+    </script>
+</body>
 </html>
+
